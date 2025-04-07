@@ -50,7 +50,7 @@ const Pacient = () => {
       setFilteredPacients(pacients);
     } else {
       const filtered = pacients.filter(pacient =>
-        `${pacient.nom}`.toLowerCase().includes(searchTerm.toLowerCase())
+        `${pacient.nom} ${pacient.cognoms}`.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredPacients(filtered);
     }
@@ -229,7 +229,7 @@ const Pacient = () => {
                   <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                     id="grid-inicihd" 
                     type="text" 
-                    value={selectedPacient.data_inici_hd}/>
+                    value={selectedPacient.data_inici_HD}/>
                   </div>
                 </div>
               </div>
