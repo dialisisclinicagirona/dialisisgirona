@@ -35,6 +35,7 @@ export default function Login() {
     }
     
     // Guardar usuari loguejat (localStorage o context)
+    
     //localStorage.setItem("usuari", JSON.stringify(data));
 
     navigate("/pacient");
