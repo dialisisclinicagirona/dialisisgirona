@@ -83,13 +83,19 @@ const Cerca = ({onPacientSelect}: CercaProps) => {
     setShowSuggestions(true);
     };
 
+    const handleSearchChange = (pacient: PacientLlista) => {
+        setSearchTerm(`${pacient.nom} ${pacient.cognoms}`);
+        setShowSuggestions(false);
+        onPacientSelect(pacient);
+    }
+
     const handleInputFocus = () => {
     setShowSuggestions(true);
     };
 
 
     return (
-        <div className="relative max-w-md" ref={searchRef}>
+        <div className="relative" ref={searchRef}>
         {/* Camp de cerca */}
         <input
             type="text"
@@ -120,7 +126,7 @@ const Cerca = ({onPacientSelect}: CercaProps) => {
                     <li 
                     key={pacient.id} 
                     className={`p-3 hover:bg-blue-50 cursor-pointer transition-colors ${selectedPacient?.id === pacient.id ? 'bg-blue-100' : ''}`}
-                    onClick={() => onPacientSelect(pacient)}
+                    onClick={() => handleSearchChange(pacient)}
                     >
                     <div className="font-medium text-gray-900">{pacient.nom} {pacient.cognoms}</div>
                     <div className="text-sm text-gray-500">ID: {pacient.id}</div>
