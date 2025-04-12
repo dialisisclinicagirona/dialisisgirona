@@ -44,44 +44,50 @@ export default function Login() {
 
   
   return (
-    <div className="flex items-start justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-sm">
-        <h1 className="text-2xl font-bold mb-6 text-center">Iniciar sessió</h1>
+    <div>
+      
+      <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center justify-center my-8">
+          <img src="./clinicaGirona192.png" alt="Logo" className="w-24 h-24 mb-4 rounded-2xl shadow-sm" />
+          <h1 className="text-2xl font-bold text-[#0066B3]">Diàlisis App - Clínica Girona</h1>
+        </div>
+        <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-sm">
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="block text-sm mb-1">Usuari</label>
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-sm mb-1">Usuari</label>
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full border rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
 
-          <div>
-            <label className="block text-sm mb-1">Contrasenya</label>
-            <input
-              type="password"
-              value={contrasenya}
-              onChange={(e) => setContrasenya(e.target.value)}
-              className="w-full border rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+            <div>
+              <label className="block text-sm mb-1">Contrasenya</label>
+              <input
+                type="password"
+                value={contrasenya}
+                onChange={(e) => setContrasenya(e.target.value)}
+                className="w-full border rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
 
-          {error && (
-            <div className="text-red-500 text-sm text-center">{error}</div>
-          )}
+            {error && (
+              <div className="text-red-500 text-sm text-center">{error}</div>
+            )}
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition"
-          >
-            Entrar
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="w-full bg-[#0097A7] hover:bg-[#007D90] text-white font-semibold py-2 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 mt-6"
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -27,6 +27,7 @@ const Top = () => {
 
         // Subscriure's als canvis d'autenticació
         const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+            console.log("Session", session);
             setUser(session?.user ?? null);
         });
 
