@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { supabase } from "../../lib/supabaseClient";
-import { Database } from '../../types/supabase';
+import { DadaPacient, Database } from '../../types/supabase';
 import PacientForm  from './components/Form';
 import Cerca from './components/Cerca';
 import Top from '../topMenu/Top';
 
-type Pacient = Database['public']['Tables']['pacients']['Row'];
+type Pacient = DadaPacient;
 type PacientLlista = Pick<Database['public']['Tables']['pacients']['Row'], 'id' | 'nom' | 'cognoms'>;
 
 const Pacient = () => {
@@ -59,14 +59,13 @@ const Pacient = () => {
   // Funció opcional per fer una consulta més detallada del pacient seleccionat
   const fetchPacientDetails = async (id: string) => {
     const { data, error } = await supabase
-      .from('pacients')
-      .select('*')
-      .eq('id', id)
-      .single();
-
-    if (!error) {
+      .rpc('get_dades_pacient', { pacient_id: id });
+  
+    if (!error && data && data.length > 0) {
       console.log("Dades del pacient:", data);
-      setSelectedPacient(data);
+      setSelectedPacient(data[0]);
+    } else {
+      console.error("Error obtenint les dades del pacient:", error);
     }
   };
 

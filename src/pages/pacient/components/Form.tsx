@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Database } from "../../../types/supabase";
+import { DadaPacient } from "../../../types/supabase";
 
-type Pacient = Database['public']['Tables']['pacients']['Row'];
+type Pacient = DadaPacient;
 type FormProps = {
     pacient: Pacient;
     onPacientChange?: (updatedPacient: Pacient) => void;
@@ -170,7 +170,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       id="grid-anticoagulant" 
                       name="anticoagulant"
                       type="text" 
-                      value={pacient.anticoagulant}
+                      value={pacient.anticoagulant_nom ?? ''}
                       onChange={handleChange}/>
                   </div>
                   <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
