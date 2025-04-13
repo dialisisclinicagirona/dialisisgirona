@@ -29,7 +29,7 @@ const Pacient = () => {
       try{
         const { data, error } = await supabase
         .from('pacients')
-        .update(selectedPacient)
+        .update(cleanPacientData(selectedPacient))
         .eq('id', id)
         .select(); // Afegeix .select() per obtenir el registre actualitzat
       
@@ -45,7 +45,10 @@ const Pacient = () => {
     }
   }
   
-
+  const cleanPacientData = (pacient: any): Partial<typeof pacient> => {
+    const { anticoagulant_nom, ...cleaned } = pacient;
+    return cleaned;
+  };
 
 
   const handlePacientSelect = (pacient: PacientLlista) => {
