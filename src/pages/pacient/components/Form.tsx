@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
-import { Anticoagulant, DadaPacient } from "../../../types/supabase";
+import { Anticoagulant, DadaPacient, Dialitzador } from "../../../types/supabase";
 
 type Pacient = DadaPacient;
 type FormProps = {
@@ -12,25 +12,40 @@ type FormProps = {
 const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
     const [tab, setTap] = useState("form-general");
     const [anticoagulants, setAnticoagulants] = useState<Anticoagulant[]>([]);
+    const [dialitzadors, setDialitzadorss] = useState<Dialitzador[]>([]);
     
     useEffect(() => {
       const fetchData = async () => {
-        const data = await fetchAnticoagulants();
-        setAnticoagulants(data);
+        const a = await fetchAnticoagulants();
+        const d = await fetchDialitzadors();
+        setAnticoagulants(a);
+        setDialitzadorss(d);
       };
 
       fetchData();
-      console.log("Anticoagulants:", anticoagulants);
+      //console.log("Anticoagulants:", anticoagulants);
     }, []);
 
     const fetchAnticoagulants = async (): Promise<Anticoagulant[]> => {
-
       const { data, error } = await supabase
         .from('anticoagulant')
         .select('*');
 
       if (error) {
         console.error("Error obtenint anticoagulants:", error.message);
+        return [];
+      }
+    
+      return data;
+    };
+
+    const fetchDialitzadors = async (): Promise<Dialitzador[]> => {
+      const { data, error } = await supabase
+        .from('dialitzador')
+        .select('*');
+
+      if (error) {
+        console.error("Error obtenint dialitzadors:", error.message);
         return [];
       }
     
@@ -208,12 +223,17 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-dialitzador">
                       Dialitzador
                     </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-dialitzador" 
                       name="dialitzador"
-                      type="text" 
                       value={pacient.dialitzador}
-                      onChange={handleChange}/>
+                      onChange={handleChange}
+                      onBlur={(onSubmitChange)}>
+                      <option value="">Selecciona</option>
+                      {dialitzadors.map((dialitzador) => (
+                        <option key={dialitzador.id} value={dialitzador.id} selected={pacient.dialitzador === dialitzador.id}>{dialitzador.nom}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-conc_acid">
