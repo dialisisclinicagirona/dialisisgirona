@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from "../../lib/supabaseClient";
 import { User } from '@supabase/supabase-js';
 
 const Top = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [menuOpen, setMenuOpen] = useState(false);
+
 
     useEffect(() => {
         // Obtenir l'usuari actual
@@ -38,6 +40,7 @@ const Top = () => {
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
+        navigate('/');
     };
 
     const isActive = (path: string) => {
