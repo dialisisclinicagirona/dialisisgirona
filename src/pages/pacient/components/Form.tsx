@@ -35,7 +35,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-nom">
                       Nom
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-nom" 
                       name="nom"
                       type="text" 
@@ -47,7 +47,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-cognoms">
                       Cognoms
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-cognoms" 
                       name="cognoms"
                       type="text" 
@@ -62,7 +62,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-naixement">
                       Data de naixement
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                     id="grid-naixement" 
                     name="data_naixement"
                     type="text" 
@@ -74,7 +74,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-poblacio">
                       Població
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                     id="grid-poblacio" 
                     name="poblacio"
                     type="text" 
@@ -86,7 +86,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-facultatiu">
                       Facultatiu
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                     id="grid-facultatiu" 
                     name="facultatiu_responsable"
                     type="text" 
@@ -102,7 +102,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
             </div>
           </div>
           
-          <div id="form-dialisi" className={`${tab !== "form-dialisi"? "hidden ":""}sm:block p-4 rounded-lg bg-gray-50`} role="tabpanel" aria-labelledby="profile-tab">
+          <div id="form-dialisi" className={`${tab !== "form-dialisi"? "hidden ":""}sm:block p-4 rounded-lg bg-gray-50 md:my-6`} role="tabpanel" aria-labelledby="profile-tab">
             {/* Informació de dialisi */}
             <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Dades de Diàlisi</h3>
             <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
@@ -114,7 +114,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-inicihd">
                       Data inici HD
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-inicihd" 
                       name="data_inici_HD"
                       type="text" 
@@ -126,7 +126,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-programacio">
                       Programació
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-programacio" 
                       name="programacio"
                       type="text" 
@@ -138,7 +138,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-ubicacio">
                       Ubicació
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-ubicacio" 
                       name="ubicacio"
                       type="text" 
@@ -150,7 +150,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-llit">
                       Llit
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-llit" 
                       name="llit"
                       type="text" 
@@ -166,7 +166,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-anticoagulant">
                       Anticoagulant
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-anticoagulant" 
                       name="anticoagulant"
                       type="text" 
@@ -177,7 +177,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-dialitzador">
                       Dialitzador
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-dialitzador" 
                       name="dialitzador"
                       type="text" 
@@ -188,7 +188,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-conc_acid">
                       Concut Àcid
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-conc_acid" 
                       name="conc_acid"
                       type="text" 
@@ -199,7 +199,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-conc_bic">
                       Concut Bic
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-conc_bic" 
                       name="conc_bic"
                       type="text" 
@@ -214,7 +214,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-qb">
                       QB (ml/min)
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-qb" 
                       name="qb"
                       type="text" 
@@ -226,7 +226,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-na">
                       NA (mmol/L)
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-na" 
                       name="na"
                       type="text" 
@@ -238,7 +238,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-t_liquid">
                       Tª Líquid (ºC)
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-t_liquid" 
                       name="t_liquid"
                       type="text" 
@@ -250,7 +250,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-ocm">
                       OCM/KtV objectiu
                     </label>
-                    <input className="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-ocm" 
                       name="ocm"
                       type="text" 
@@ -267,7 +267,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
             <div className="fixed bottom-0 left-0 right-0 sm:hidden bg-white border-t border-gray-200 shadow-md">
               <ul className="text-sm font-medium text-center text-gray-500 flex">
                 <li className="w-1/4 focus-within:z-10">
-                  <button type="button" className="inline-block w-full p-4 text-gray-900 bg-gray-100 border-r border-gray-200 focus:ring-4 focus:ring-blue-300 active focus:outline-none" aria-current="page"
+                  <button type="button" className="inline-block w-full p-4 text-gray-900 bg-gray-50 border-r border-gray-200 focus:ring-4 focus:ring-blue-300 active focus:outline-none" aria-current="page"
                     onClick={() => setTap("form-general")}>General</button>
                 </li>
                 <li className="w-1/4 focus-within:z-10">

@@ -76,7 +76,7 @@ const Pacient = () => {
     <Top />
     <div className="max-w-250 mx-auto p-6">
       <div className="flex">
-        <div className="w-1/2">
+        <div className="w-full md:w-1/2">
           <Cerca onPacientSelect={handlePacientSelect} />
         </div>
         <div></div>
