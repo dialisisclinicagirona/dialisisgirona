@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
-import { Anticoagulant, DadaPacient, Dialitzador } from "../../../types/supabase";
+import { Anticoagulant, ConcentracioAcid, ConcentracioBicarbonat, DadaPacient, Dialitzador, SegellatCVC } from "../../../types/supabase";
 
 type Pacient = DadaPacient;
 type FormProps = {
@@ -12,19 +12,32 @@ type FormProps = {
 const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
     const [tab, setTap] = useState("form-general");
     const [anticoagulants, setAnticoagulants] = useState<Anticoagulant[]>([]);
-    const [dialitzadors, setDialitzadorss] = useState<Dialitzador[]>([]);
+    const [dialitzadors, setDialitzadors] = useState<Dialitzador[]>([]);
+    const [concsAcid, setConcsAcid] = useState<ConcentracioAcid[]>([]);
+    const [concsBic, setConcsBic] = useState<ConcentracioBicarbonat[]>([]);
+    const [segellatsCVC, setSegellatsCVC] = useState<SegellatCVC[]>([]);
     
     useEffect(() => {
       const fetchData = async () => {
         const a = await fetchAnticoagulants();
         const d = await fetchDialitzadors();
+        const ca = await fetchConcentracionsAcid();
+        const cb = await fetchConcentracionsBicarbonat();
+        const sc = await fetchSegellatsCVC();
         setAnticoagulants(a);
-        setDialitzadorss(d);
+        setDialitzadors(d);
+        setConcsAcid(ca);
+        setConcsBic(cb);
+        setSegellatsCVC(sc);
       };
 
       fetchData();
       //console.log("Anticoagulants:", anticoagulants);
     }, []);
+
+    useEffect(() => {
+     console.log("Pacient changed", pacient);
+    }, [JSON.stringify(pacient)]);
 
     const fetchAnticoagulants = async (): Promise<Anticoagulant[]> => {
       const { data, error } = await supabase
@@ -46,6 +59,45 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
 
       if (error) {
         console.error("Error obtenint dialitzadors:", error.message);
+        return [];
+      }
+    
+      return data;
+    };
+
+    const fetchConcentracionsAcid = async (): Promise<ConcentracioAcid[]> => {
+      const { data, error } = await supabase
+        .from('concentracio_acid')
+        .select('*');
+
+      if (error) {
+        console.error("Error obtenint concentracions acid:", error.message);
+        return [];
+      }
+    
+      return data;
+    };
+
+    const fetchConcentracionsBicarbonat = async (): Promise<ConcentracioBicarbonat[]> => {
+      const { data, error } = await supabase
+        .from('concentracio_bicarbonat')
+        .select('*');
+
+      if (error) {
+        console.error("Error obtenint concentracions bicarbonat:", error.message);
+        return [];
+      }
+    
+      return data;
+    };
+
+    const fetchSegellatsCVC = async (): Promise<SegellatCVC[]> => {
+      const { data, error } = await supabase
+        .from('segellat_cvc')
+        .select('*');
+
+      if (error) {
+        console.error("Error obtenint segellats CVC:", error.message);
         return [];
       }
     
@@ -135,10 +187,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     onChange={handleChange}
                     onBlur={(onSubmitChange)} />
                   </div>
-
                 </div>
-
-
               </div>
             </div>
           </div>
@@ -229,7 +278,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       value={pacient.dialitzador}
                       onChange={handleChange}
                       onBlur={(onSubmitChange)}>
-                      <option value="">Selecciona</option>
+                      <option value="" selected={!pacient.dialitzador}>Selecciona</option>
                       {dialitzadors.map((dialitzador) => (
                         <option key={dialitzador.id} value={dialitzador.id} selected={pacient.dialitzador === dialitzador.id}>{dialitzador.nom}</option>
                       ))}
@@ -239,23 +288,33 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-conc_acid">
                       Concut Àcid
                     </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-conc_acid" 
                       name="conc_acid"
-                      type="text" 
                       value={pacient.conc_acid}
-                      onChange={handleChange}/>
+                      onChange={handleChange}
+                      onBlur={(onSubmitChange)}>
+                      <option value="" selected={!pacient.conc_acid}>Selecciona</option>
+                      {concsAcid.map((c) => (
+                        <option key={c.id} value={c.id} selected={pacient.conc_acid === c.id}>{c.nom}</option>
+                      ))}
+                    </select>
                   </div>
                   <div className="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-conc_bic">
                       Concut Bic
                     </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                       id="grid-conc_bic" 
                       name="conc_bic"
-                      type="text" 
                       value={pacient.conc_bic}
-                      onChange={handleChange}/>
+                      onChange={handleChange}
+                      onBlur={(onSubmitChange)}>
+                      <option value="" selected={!pacient.conc_bic}>Selecciona</option>
+                      {concsBic.map((c) => (
+                        <option key={c.id} value={c.id} selected={pacient.conc_bic === c.id}>{c.nom}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 

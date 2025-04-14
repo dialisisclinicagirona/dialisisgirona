@@ -44,20 +44,17 @@ const Pacient = () => {
       }
     }
   }
-  
+
   const cleanPacientData = (pacient: any): Partial<typeof pacient> => {
-    const { anticoagulant_nom, ...cleaned } = pacient;
+    const { anticoagulant_nom, dialitzador_nom, conc_acid_nom, conc_bic_nom, segellat_cvc_nom, ...cleaned } = pacient;
     return cleaned;
   };
-
 
   const handlePacientSelect = (pacient: PacientLlista) => {
     // Aquí pots fer la consulta a Supabase amb l'ID seleccionat
     console.log("Pacient seleccionat:", pacient);
     fetchPacientDetails(pacient.id);
   };
-
-
 
   // Funció opcional per fer una consulta més detallada del pacient seleccionat
   const fetchPacientDetails = async (id: string) => {
