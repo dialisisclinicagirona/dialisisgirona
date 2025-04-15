@@ -130,11 +130,11 @@ const Top = () => {
                 Pacient
               </Link>
               <Link
-                to="/sala"
-                className={`${isActive('/sala')} block text-white hover:text-gray-100`}
+                to="/usuaris"
+                className={`${isActive('/usuaris')} block text-white hover:text-gray-100`}
                 onClick={() => setMenuOpen(false)}
               >
-                Filtre per sala
+                Usuaris
               </Link>
             </div>
           </div>
