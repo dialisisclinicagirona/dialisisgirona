@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
-import { Anticoagulant, ConcentracioAcid, ConcentracioBicarbonat, DadaPacient, Dialitzador, SegellatCVC } from "../../../types/supabase";
+import { DadaPacient, Option } from "../../../types/supabase";
 import InputText from "../../common/InputText";
 import SelectInput from "../../common/Selector";
 
@@ -13,11 +13,11 @@ type FormProps = {
 
 const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
     const [tab, setTap] = useState("form-general");
-    const [anticoagulants, setAnticoagulants] = useState<Anticoagulant[]>([]);
-    const [dialitzadors, setDialitzadors] = useState<Dialitzador[]>([]);
-    const [concsAcid, setConcsAcid] = useState<ConcentracioAcid[]>([]);
-    const [concsBic, setConcsBic] = useState<ConcentracioBicarbonat[]>([]);
-    const [segellatsCVC, setSegellatsCVC] = useState<SegellatCVC[]>([]);
+    const [anticoagulants, setAnticoagulants] = useState<Option[]>([]);
+    const [dialitzadors, setDialitzadors] = useState<Option[]>([]);
+    const [concsAcid, setConcsAcid] = useState<Option[]>([]);
+    const [concsBic, setConcsBic] = useState<Option[]>([]);
+    const [segellatsCVC, setSegellatsCVC] = useState<Option[]>([]);
     
     useEffect(() => {
       const fetchData = async () => {
@@ -34,14 +34,13 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
       };
 
       fetchData();
-      //console.log("Anticoagulants:", anticoagulants);
     }, []);
 
     useEffect(() => {
      console.log("Pacient changed", pacient);
     }, [JSON.stringify(pacient)]);
 
-    const fetchAnticoagulants = async (): Promise<Anticoagulant[]> => {
+    const fetchAnticoagulants = async (): Promise<Option[]> => {
       const { data, error } = await supabase
         .from('anticoagulant')
         .select('*');
@@ -54,7 +53,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
       return data;
     };
 
-    const fetchDialitzadors = async (): Promise<Dialitzador[]> => {
+    const fetchDialitzadors = async (): Promise<Option[]> => {
       const { data, error } = await supabase
         .from('dialitzador')
         .select('*');
@@ -67,7 +66,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
       return data;
     };
 
-    const fetchConcentracionsAcid = async (): Promise<ConcentracioAcid[]> => {
+    const fetchConcentracionsAcid = async (): Promise<Option[]> => {
       const { data, error } = await supabase
         .from('concentracio_acid')
         .select('*');
@@ -80,7 +79,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
       return data;
     };
 
-    const fetchConcentracionsBicarbonat = async (): Promise<ConcentracioBicarbonat[]> => {
+    const fetchConcentracionsBicarbonat = async (): Promise<Option[]> => {
       const { data, error } = await supabase
         .from('concentracio_bicarbonat')
         .select('*');
@@ -93,7 +92,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
       return data;
     };
 
-    const fetchSegellatsCVC = async (): Promise<SegellatCVC[]> => {
+    const fetchSegellatsCVC = async (): Promise<Option[]> => {
       const { data, error } = await supabase
         .from('segellat_cvc')
         .select('*');
@@ -110,7 +109,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
       if (onPacientChange) {
         onPacientChange({
           ...pacient,
-          [e.target.name]: e.target.value
+          [e.target.name]: e.target.value || null
         });
       }
     };
@@ -189,7 +188,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                 <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Diàlisi</h3>
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                  
+
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-inicihd">
                       Data inici HD
                     </label>

@@ -1,16 +1,12 @@
-import { Anticoagulant, DadaPacient } from "../../types/supabase";
+import { DadaPacient, Option } from "../../types/supabase";
 
 type Pacient = DadaPacient;
-type Option = {
-  id: string;
-  nom: string;
-};
 
 type SelectProps = {
   label: string;
   pacient: Pacient;
   prop: keyof Pacient;
-  options: Anticoagulant[];
+  options: Option[];
   onPacientChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onSubmitChange?: () => void;
 };
