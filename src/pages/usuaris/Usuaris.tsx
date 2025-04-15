@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase, supabaseAdmin } from '../../lib/supabaseClient';
 import Top from '../topMenu/Top';
+import InputText from '../common/InputText';
 
 // Define the Perfil type based on the task description
 interface Perfil {
@@ -247,33 +248,27 @@ const Usuaris = () => {
             )}
             
             <form onSubmit={handleInvite} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nom
-                </label>
-                <input
-                  type="text"
+            <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/3 px-2">
+                <InputText
+                  label='Nom'
                   value={inviteName}
-                  onChange={(e) => setInviteName(e.target.value)}
-                  className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
+                  prop='nom'
+                  onValueChanged={(e) => setInviteName(e.target.value)}
                 />
               </div>
               
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={inviteEmail}
-                  onChange={(e) => setInviteEmail(e.target.value)}
-                  className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
+              <div className="w-full md:w-1/3 px-2">
+                <InputText
+                label='Email'
+                value={inviteEmail}
+                prop='email'
+                onValueChanged={(e) => setInviteEmail(e.target.value)}
                 />
+                
               </div>
               
-              <div>
+              <div className="w-full md:w-1/3 px-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Rol
                 </label>
@@ -286,6 +281,7 @@ const Usuaris = () => {
                   <option value="usuari">Usuari</option>
                   <option value="admin">Administrador</option>
                 </select>
+              </div>
               </div>
               
               <button

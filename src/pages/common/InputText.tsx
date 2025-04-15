@@ -3,12 +3,12 @@ import { DadaPacient } from "../../types/supabase";
 type Pacient = DadaPacient;
 type InputProps = {
     label: string;
-    pacient: Pacient;
-    prop: keyof Pacient;
-    onPacientChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onSubmitChange?: () => void;
+    value: string;
+    prop: keyof Pacient | string;
+    onValueChanged?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onSubmit?: () => void;
 };
-const InputText = ({label, pacient, prop, onPacientChange, onSubmitChange}: InputProps) => {
+const InputText = ({label, value, prop, onValueChanged, onSubmit}: InputProps) => {
     return (
     <>
         <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor={`grid-${prop}`}>
@@ -18,9 +18,9 @@ const InputText = ({label, pacient, prop, onPacientChange, onSubmitChange}: Inpu
             id={`grid-${prop}`}
             name={prop}
             type="text" 
-            value={pacient[prop]}
-            onChange={onPacientChange}
-            onBlur={(onSubmitChange)} />
+            value={value}
+            onChange={onValueChanged}
+            onBlur={(onSubmit)} />
     </>);
 };
 

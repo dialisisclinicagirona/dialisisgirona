@@ -128,18 +128,18 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                   <div className="w-full md:w-1/3 px-2">
                     <InputText 
                       label="Nom" 
-                      pacient={pacient} 
+                      value={pacient.nom} 
                       prop="nom" 
-                      onPacientChange={handleChange} 
-                      onSubmitChange={onSubmitChange} />
+                      onValueChanged={handleChange} 
+                      onSubmit={onSubmitChange} />
                   </div>
                   <div className="w-full md:w-1/3 px-2">
                     <InputText 
                       label="Cognoms"
-                      pacient={pacient}
+                      value={pacient.cognoms}
                       prop="cognoms"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange} />
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange} />
                   </div>
                 </div>
 
@@ -160,19 +160,19 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                   <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
                     <InputText 
                       label="Població"
-                      pacient={pacient}
+                      value={pacient.poblacio}
                       prop="poblacio"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange} 
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange} 
                     />
                   </div>
                   <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
                     <InputText
                       label="Facultatiu"
-                      pacient={pacient}
+                      value={pacient.facultatiu_responsable}
                       prop="facultatiu_responsable"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                 </div>
@@ -220,19 +220,19 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                   <InputText
                       label="Ubicació" 
-                      pacient={pacient}
+                      value={pacient.ubicacio}
                       prop="ubicacio"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="Llit"
-                      pacient={pacient}
+                      value={pacient.llit?.toString() ?? ''}
                       prop="llit"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                 </div>
@@ -296,37 +296,37 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="QB (ml/min)"
-                      pacient={pacient}
+                      value={pacient.qb?.toString() ?? ''}
                       prop="qb"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="NA (mmol/L)"
-                      pacient={pacient}
+                      value={pacient.na?.toString() ?? ''}
                       prop="na"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="Tª Líquid (ºC)"
-                      pacient={pacient}
+                      value={pacient.t_liquid?.toString() ?? ''}
                       prop="t_liquid"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="OCM/KtV objectiu"
-                      pacient={pacient}
+                      value={pacient.ocm?.toString() ?? ''}
                       prop="ocm"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                 </div>
@@ -338,19 +338,19 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="UF màx. Total (ml)"
-                      pacient={pacient}
+                      value={pacient.uf_total?.toString() ?? ''}
                       prop="uf_total"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="UF màx. horària (ml/h)"
-                      pacient={pacient}
+                      value={pacient.uf_horaria?.toString() ?? ''}
                       prop="uf_horaria"
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
