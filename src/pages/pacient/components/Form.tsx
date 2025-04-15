@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import { Anticoagulant, ConcentracioAcid, ConcentracioBicarbonat, DadaPacient, Dialitzador, SegellatCVC } from "../../../types/supabase";
+import InputText from "../../common/InputText";
+import SelectInput from "../../common/Selector";
 
 type Pacient = DadaPacient;
 type FormProps = {
@@ -123,35 +125,27 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
               <div className="space-y-2">
                 {/* Nom i cognoms */}
                 <div className="flex flex-wrap -mx-3 mb-6">
-                  
                   <div className="w-full md:w-1/3 px-2">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-nom">
-                      Nom
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-nom" 
-                      name="nom"
-                      type="text" 
-                      value={pacient.nom}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)} />
+                    <InputText 
+                      label="Nom" 
+                      pacient={pacient} 
+                      prop="nom" 
+                      onPacientChange={handleChange} 
+                      onSubmitChange={onSubmitChange} />
                   </div>
                   <div className="w-full md:w-1/3 px-2">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-cognoms">
-                      Cognoms
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-cognoms" 
-                      name="cognoms"
-                      type="text" 
-                      value={pacient.cognoms}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                    <InputText 
+                      label="Cognoms"
+                      pacient={pacient}
+                      prop="cognoms"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange} />
                   </div>
                 </div>
 
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
+
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-naixement">
                       Data de naixement
                     </label>
@@ -164,28 +158,22 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     onBlur={(onSubmitChange)} />
                   </div>
                   <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-poblacio">
-                      Població
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="grid-poblacio" 
-                    name="poblacio"
-                    type="text" 
-                    value={pacient.poblacio}
-                    onChange={handleChange}
-                    onBlur={(onSubmitChange)} />
+                    <InputText 
+                      label="Població"
+                      pacient={pacient}
+                      prop="poblacio"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange} 
+                    />
                   </div>
                   <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-facultatiu">
-                      Facultatiu
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="grid-facultatiu" 
-                    name="facultatiu_responsable"
-                    type="text" 
-                    value={pacient.facultatiu_responsable}
-                    onChange={handleChange}
-                    onBlur={(onSubmitChange)} />
+                    <InputText
+                      label="Facultatiu"
+                      pacient={pacient}
+                      prop="facultatiu_responsable"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                 </div>
               </div>
@@ -201,6 +189,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                 <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Diàlisi</h3>
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+                  
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-inicihd">
                       Data inici HD
                     </label>
@@ -213,40 +202,38 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       onBlur={(onSubmitChange)}/>
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+                    
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-programacio">
                       Programació
                     </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-programacio" 
+                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                       id="grid-programacio" 
                       name="programacio"
-                      type="text" 
                       value={pacient.programacio ?? ''}
                       onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                      onBlur={(onSubmitChange)}>
+                      <option value="">Selecciona</option>
+                      <option value="Dl, Dx, Dv">Dl, Dx, Dv</option>
+                      <option value="Dm, Dj, Ds">Dm, Dj, Ds</option>
+                    </select>
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-ubicacio">
-                      Ubicació
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-ubicacio" 
-                      name="ubicacio"
-                      type="text" 
-                      value={pacient.ubicacio ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                  <InputText
+                      label="Ubicació" 
+                      pacient={pacient}
+                      prop="ubicacio"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-llit">
-                      Llit
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-llit" 
-                      name="llit"
-                      type="text" 
-                      value={pacient.llit ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                    <InputText
+                      label="Llit"
+                      pacient={pacient}
+                      prop="llit"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                 </div>
 
@@ -255,36 +242,24 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                 <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Pauta</h3>
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-anticoagulant">
-                      Anticoagulant
-                    </label>
-                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-anticoagulant" 
-                      name="anticoagulant"
-                      value={pacient.anticoagulant ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}>
-                      <option value="">Selecciona</option>
-                      {anticoagulants.map((anticoagulant) => (
-                        <option key={anticoagulant.id} value={anticoagulant.id} selected={pacient.anticoagulant === anticoagulant.id}>{anticoagulant.nom}</option>
-                      ))}
-                    </select>
+                  <SelectInput
+                    label="Anticoagulant"
+                    pacient={pacient}
+                    prop="anticoagulant"
+                    options={anticoagulants}
+                    onPacientChange={handleChange}
+                    onSubmitChange={onSubmitChange}
+                  />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-dialitzador">
-                      Dialitzador
-                    </label>
-                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-dialitzador" 
-                      name="dialitzador"
-                      value={pacient.dialitzador ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}>
-                      <option value="">Selecciona</option>
-                      {dialitzadors.map((dialitzador) => (
-                        <option key={dialitzador.id} value={dialitzador.id}>{dialitzador.nom}</option>
-                      ))}
-                    </select>
+                    <SelectInput
+                      label="Dialitzador"
+                      pacient={pacient}
+                      prop="dialitzador"
+                      options={dialitzadors}
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-conc_acid">
@@ -303,20 +278,14 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     </select>
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-conc_bic">
-                      Concut Bic
-                    </label>
-                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-conc_bic" 
-                      name="conc_bic"
-                      value={pacient.conc_bic ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}>
-                      <option value="">Selecciona</option>
-                      {concsBic.map((c) => (
-                        <option key={c.id} value={c.id}>{c.nom}</option>
-                      ))}
-                    </select>
+                    <SelectInput
+                      label="Concentració Bicarbonat"
+                      pacient={pacient}
+                      prop="conc_bic"
+                      options={concsBic}
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                 </div>
 
@@ -325,53 +294,39 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                 <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Bany de diàlisi</h3>
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-qb">
-                      QB (ml/min)
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-qb" 
-                      name="qb"
-                      type="text" 
-                      value={pacient.qb ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                    <InputText
+                      label="QB (ml/min)"
+                      pacient={pacient}
+                      prop="qb"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-na">
-                      NA (mmol/L)
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-na" 
-                      name="na"
-                      type="text" 
-                      value={pacient.na ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                    <InputText
+                      label="NA (mmol/L)"
+                      pacient={pacient}
+                      prop="na"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-t_liquid">
-                      Tª Líquid (ºC)
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-t_liquid" 
-                      name="t_liquid"
-                      type="text" 
-                      value={pacient.t_liquid ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                    <InputText
+                      label="Tª Líquid (ºC)"
+                      pacient={pacient}
+                      prop="t_liquid"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-ocm">
-                      OCM/KtV objectiu
-                    </label>
-                    <input
-                      className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-ocm"
-                      name="ocm"
-                      type="text"
-                      value={pacient.ocm ?? ''}
-                      onChange={handleChange}
-                      onBlur={onSubmitChange}
+                    <InputText
+                      label="OCM/KtV objectiu"
+                      pacient={pacient}
+                      prop="ocm"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
                     />
                   </div>
                 </div>
@@ -381,30 +336,25 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                 <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">UF</h3>
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-ocm">
-                      UF màx. Total (ml)
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-uf_total" 
-                      name="uf_total"
-                      type="text" 
-                      value={pacient.uf_total ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                    <InputText
+                      label="UF màx. Total (ml)"
+                      pacient={pacient}
+                      prop="uf_total"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-ocm">
-                      UF màx. horària (ml/h)
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-uf_horaria" 
-                      name="uf_horaria"
-                      type="text" 
-                      value={pacient.uf_horaria ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                    <InputText
+                      label="UF màx. horària (ml/h)"
+                      pacient={pacient}
+                      prop="uf_horaria"
+                      onPacientChange={handleChange}
+                      onSubmitChange={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+                  
                     <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-ocm">
                       Tolèrancia UF seca
                     </label>
