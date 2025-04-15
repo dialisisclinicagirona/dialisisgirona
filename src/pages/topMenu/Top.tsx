@@ -81,8 +81,8 @@ const Top = () => {
                     <Link to="/pacient" className={isActive('/pacient')}>
                       <span className="text-white hover:text-gray-100">Pacient</span>
                     </Link>
-                    <Link to="/sala" className={isActive('/sala')}>
-                      <span className="text-white hover:text-gray-100">Filtre per sala</span>
+                    <Link to="/usuaris" className={isActive('/usuaris')}>
+                      <span className="text-white hover:text-gray-100">Usuaris</span>
                     </Link>
                   </div>
                 </div>
