@@ -31,6 +31,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
         setConcsAcid(ca);
         setConcsBic(cb);
         setSegellatsCVC(sc);
+        console.log(segellatsCVC);
       };
 
       fetchData();
