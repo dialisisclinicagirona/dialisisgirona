@@ -4,14 +4,14 @@ type Pacient = DadaPacient;
 
 type SelectProps = {
   label: string;
-  pacient: Pacient;
-  prop: keyof Pacient;
+  value: string;
+  prop: keyof Pacient | string;
   options: Option[];
-  onPacientChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  onSubmitChange?: () => void;
+  onValueChanged?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onSubmit?: () => void;
 };
 
-const SelectInput = ({ label, pacient, prop, options, onPacientChange, onSubmitChange }: SelectProps) => {
+const SelectInput = ({ label, value, prop, options, onValueChanged, onSubmit }: SelectProps) => {
   return (
     <>
       <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor={`grid-${prop}`}>
@@ -21,9 +21,9 @@ const SelectInput = ({ label, pacient, prop, options, onPacientChange, onSubmitC
         className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         id={`grid-${prop}`}
         name={prop}
-        value={pacient[prop] ?? ""}
-        onChange={onPacientChange}
-        onBlur={onSubmitChange}
+        value={value ?? ""}
+        onChange={onValueChanged}
+        onBlur={onSubmit}
       >
         <option value="">Selecciona</option>
         {options.map((option) => (

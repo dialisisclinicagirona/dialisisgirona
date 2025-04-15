@@ -18,6 +18,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
     const [concsAcid, setConcsAcid] = useState<Option[]>([]);
     const [concsBic, setConcsBic] = useState<Option[]>([]);
     const [segellatsCVC, setSegellatsCVC] = useState<Option[]>([]);
+    const opcionsSN = [{ id: "Sí", nom: "Sí" }, { id: "No", nom: "No" }];
     
     useEffect(() => {
       const fetchData = async () => {
@@ -244,47 +245,41 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                   <SelectInput
                     label="Anticoagulant"
-                    pacient={pacient}
+                    value={pacient.anticoagulant?.toString() ?? ''}
                     prop="anticoagulant"
                     options={anticoagulants}
-                    onPacientChange={handleChange}
-                    onSubmitChange={onSubmitChange}
+                    onValueChanged={handleChange}
+                    onSubmit={onSubmitChange}
                   />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <SelectInput
                       label="Dialitzador"
-                      pacient={pacient}
+                      value={pacient.dialitzador?.toString() ?? ''}
                       prop="dialitzador"
                       options={dialitzadors}
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-conc_acid">
-                      Concut Àcid
-                    </label>
-                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-conc_acid" 
-                      name="conc_acid"
-                      value={pacient.conc_acid ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}>
-                      <option value="">Selecciona</option>
-                      {concsAcid.map((c) => (
-                        <option key={c.id} value={c.id}>{c.nom}</option>
-                      ))}
-                    </select>
+                    <SelectInput
+                      label="Concentració Acid"
+                      value={pacient.conc_acid?.toString() ?? ''}
+                      prop="conc_acid"
+                      options={concsAcid}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <SelectInput
                       label="Concentració Bicarbonat"
-                      pacient={pacient}
+                      value={pacient.conc_acid?.toString() ?? ''}
                       prop="conc_bic"
                       options={concsBic}
-                      onPacientChange={handleChange}
-                      onSubmitChange={onSubmitChange}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
                     />
                   </div>
                 </div>
@@ -354,35 +349,24 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                     />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                  
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-ocm">
-                      Tolèrancia UF seca
-                    </label>
-                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-tolerancia_uf" 
-                      name="tolerancia_uf"
-                      value={pacient.tolerancia_uf ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}>
-                      <option value="">Selecciona</option>
-                      <option value="Sí">Sí</option>
-                      <option value="No">No</option>
-                    </select>
+                    <SelectInput
+                      label="Tolerancia UF seca"
+                      value={pacient.tolerancia_uf?.toString() ?? ''}
+                      prop="tolerancia_uf"
+                      options={opcionsSN}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-ocm">
-                      Perfil UF
-                    </label>
-                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-perfil_uf" 
-                      name="perfil_uf"
-                      value={pacient.perfil_uf ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}>
-                      <option value="">Selecciona</option>
-                      <option value="Sí">Sí</option>
-                      <option value="No">No</option>
-                    </select>
+                    <SelectInput
+                      label="Perfil UF"
+                      value={pacient.perfil_uf?.toString() ?? ''}
+                      prop="perfil_uf"
+                      options={opcionsSN}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
+                    />
                   </div>
                 </div>
               </div>
