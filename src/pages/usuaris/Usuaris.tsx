@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../lib/supabaseClient';
+import { supabase, supabaseAdmin } from '../../lib/supabaseClient';
 import Top from '../topMenu/Top';
 
 // Define the Perfil type based on the task description
@@ -83,9 +83,13 @@ const Usuaris = () => {
     try {
       setLoading(true);
       
-      // Send invitation email using Supabase Auth
-      const { data, error } = await supabase.auth.admin.inviteUserByEmail(inviteEmail);
-      
+      // Send invitation email using Supabase Auth with admin privileges
+      const { data, error } = await supabaseAdmin.auth.admin.inviteUserByEmail(inviteEmail,
+        {
+          redirectTo: 'https://dialisisgirona.vercel.app/set-password',
+        }
+      );
+      console.log(data, error);
       if (error) throw error;
       
       // Create profile entry for the invited user
@@ -95,6 +99,7 @@ const Usuaris = () => {
           .insert([
             { 
               id: data.user.id, 
+              username:inviteEmail,
               nom: inviteName, 
               email: inviteEmail, 
               rol: inviteRole 
@@ -141,8 +146,8 @@ const Usuaris = () => {
     try {
       setLoading(true);
       
-      // Delete user from auth system
-      const { error: authError } = await supabase.auth.admin.deleteUser(id);
+      // Delete user from auth system with admin privileges
+      const { error: authError } = await supabaseAdmin.auth.admin.deleteUser(id);
       
       if (authError) throw authError;
       
