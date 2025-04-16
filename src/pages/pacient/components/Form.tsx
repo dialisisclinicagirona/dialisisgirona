@@ -119,6 +119,38 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
 
     return (
         <div className="mt-6">
+          {/* Tabs per a pantalles més grans */}
+          <div className="hidden sm:block mb-4">
+            <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200">
+              <li className="mr-2">
+                <button 
+                  type="button" 
+                  className={`inline-block p-4 rounded-t-lg ${tab === "form-general" ? "text-blue-600 bg-gray-50 border-b-2 border-blue-600 active" : "hover:text-gray-600 hover:bg-gray-50"}`}
+                  onClick={() => setTab("form-general")}
+                >
+                  Dades del Pacient
+                </button>
+              </li>
+              <li className="mr-2">
+                <button 
+                  type="button" 
+                  className={`inline-block p-4 rounded-t-lg ${tab === "form-dialisi" ? "text-blue-600 bg-gray-50 border-b-2 border-blue-600 active" : "hover:text-gray-600 hover:bg-gray-50"}`}
+                  onClick={() => setTab("form-dialisi")}
+                >
+                  Paràmetres de Diàlisi
+                </button>
+              </li>
+              <li>
+                <button 
+                  type="button" 
+                  className={`inline-block p-4 rounded-t-lg ${tab === "form-venos" ? "text-blue-600 bg-gray-50 border-b-2 border-blue-600 active" : "hover:text-gray-600 hover:bg-gray-50"}`}
+                  onClick={() => setTab("form-venos")}
+                >
+                  Accès Vascular Hemostàsia
+                </button>
+              </li>
+            </ul>
+          </div>
           
           <div id="form-general" className={`${tab !== "form-general"? "hidden ":""}p-4 rounded-lg bg-gray-50`} role="tabpanel" aria-labelledby="profile-tab">
             {/* Informació general del pacient */}
@@ -289,7 +321,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
             </div>
           </div>
           
-          <div id="form-dialisi" className={`${tab !== "form-dialisi"? "hidden ":""}sm:block p-4 rounded-lg bg-gray-50 md:my-6`} role="tabpanel" aria-labelledby="profile-tab">
+          <div id="form-dialisi" className={`${tab !== "form-dialisi"? "hidden ":""} p-4 rounded-lg bg-gray-50 md:my-6`} role="tabpanel" aria-labelledby="profile-tab">
             {/* Informació de dialisi */}
             <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Dades de Diàlisi</h3>
             <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
@@ -503,7 +535,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
             </div>
           </div>
 
-          <div id="form-venos" className={`${tab !== "form-venos"? "hidden ":""}sm:block p-4 rounded-lg bg-gray-50 md:my-6`} role="tabpanel" aria-labelledby="profile-tab">
+          <div id="form-venos" className={`${tab !== "form-venos"? "hidden ":""} p-4 rounded-lg bg-gray-50 md:my-6`} role="tabpanel" aria-labelledby="profile-tab">
               {/* Informació de dialisi */}
               <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Accés venòs</h3>
               <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
