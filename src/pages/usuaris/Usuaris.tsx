@@ -41,7 +41,8 @@ const Usuaris = () => {
         // Get current user
         const { data: { user } } = await supabase.auth.getUser();
         setCurrentUser(user);
-        
+        console.log("current user", user);
+        let admin = false;
         if (user) {
           // Check if current user is admin
           const { data: userProfile, error: profileError } = await supabase
@@ -51,8 +52,9 @@ const Usuaris = () => {
             .single();
           
           if (profileError) throw profileError;
-          
-          setIsAdmin(userProfile?.rol === 'admin');
+          console.log("profile", userProfile);
+          admin = userProfile?.rol === 'admin';
+          setIsAdmin(admin);
         }
         
         // Fetch all profiles
@@ -64,7 +66,7 @@ const Usuaris = () => {
         if (error) throw error;
         
         // If admin, get verification status for all users
-        if (isAdmin) {
+        if (admin) {
           const userIds = data?.map(profile => profile.id) || [];
           
           // Get user auth data for all profiles
@@ -80,7 +82,7 @@ const Usuaris = () => {
               }
             })
           );
-          
+          console.log("authUsers", authUsers);
           // Combine profile data with auth data
           const profilesWithAuth = data?.map((profile, index) => {
             const authUser = authUsers[index];
@@ -90,9 +92,10 @@ const Usuaris = () => {
               invitation_sent_at: authUser?.created_at // Using created_at as proxy for invitation sent date
             };
           });
-          
+          console.log("profilesWithAuth", profilesWithAuth);
           setPerfils(profilesWithAuth || []);
         } else {
+          console.log("Perfils", data);
           setPerfils(data || []);
         }
       } catch (error: any) {
@@ -342,13 +345,15 @@ const Usuaris = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Rol
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Verificació
-                </th>
                 {isAdmin && (
+                  <>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Verificació
+                  </th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Accions
                   </th>
+                  </>
                 )}
               </tr>
             </thead>
@@ -397,7 +402,9 @@ const Usuaris = () => {
                         perfil.rol
                       )}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    {isAdmin && (
+                      <>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
                       {perfil.email_confirmed_at ? (
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           Verificat
@@ -415,7 +422,7 @@ const Usuaris = () => {
                         </div>
                       )}
                     </td>
-                    {isAdmin && (
+                    
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         {editingUser?.id === perfil.id ? (
                           <div className="flex justify-end space-x-2">
@@ -452,6 +459,7 @@ const Usuaris = () => {
                           </div>
                         )}
                       </td>
+                      </>
                     )}
                   </tr>
                 ))

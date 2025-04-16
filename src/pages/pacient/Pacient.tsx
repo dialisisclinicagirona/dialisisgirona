@@ -13,6 +13,7 @@ const PacientView = () => {
   const { id } = useParams<{ id?: string }>();
   const [selectedPacient, setSelectedPacient] = useState<DadaPacient | null>(null);
   const [allowUpadate, setAllowUpdate] = useState(false);
+  const [resetCerca, setResetCerca] = useState(Date.now());
   
   // Carregar pacient automàticament si hi ha un ID a la URL
   useEffect(() => {
@@ -76,6 +77,7 @@ const PacientView = () => {
 
         console.log('Pacient actualitzat:', data);
         setAllowUpdate(false);
+        setResetCerca(Date.now());
         return data;
       }
       
@@ -172,6 +174,7 @@ const PacientView = () => {
         
         console.log('Pacient esborrat correctament');
         setSelectedPacient(null); // Netejar l'estat del pacient seleccionat
+        setResetCerca(Date.now());
       } catch (error) {
         console.error('Error esborrant pacient:', error);
       }
@@ -184,16 +187,18 @@ const PacientView = () => {
     <div className="max-w-250 mx-auto p-6">
       <div className="flex justify-between items-center mb-4">
         <div className="w-full md:w-1/2">
-          <Cerca onPacientSelect={handlePacientSelect} />
+          <Cerca onPacientSelect={handlePacientSelect} reset={resetCerca} />
         </div>
         <div className="flex space-x-2">
-          <button 
-            onClick={handleCreateNewPacient}
-            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Nou Pacient
-          </button>
-          {selectedPacient && (
+          {((!selectedPacient) || (selectedPacient && selectedPacient.id)) && (
+            <button 
+              onClick={handleCreateNewPacient}
+              className="bg-[#0097A7] hover:bg-[#2cc0d0] text-white font-bold py-2 px-4 rounded"
+            >
+              Nou Pacient
+            </button>
+          )}
+          {selectedPacient && selectedPacient.id && (
             <button 
               onClick={handleDeletePacient}
               className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"

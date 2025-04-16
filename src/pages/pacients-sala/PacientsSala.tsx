@@ -53,13 +53,29 @@ const PacientsSala = () => {
             ubicacio: pacient.ubicacio
           }));
 
-          setPacients(filteredData);
-          setFilteredPacients(filteredData);
+          const filteredDataOrdenada = filteredData.sort((a: DadaPacient, b: DadaPacient) => {
+            // Primero comparamos por apellidos
+            const cognomsComparacion = a.cognoms.localeCompare(b.cognoms, 'ca');
+            
+            // Si los apellidos son iguales, comparamos por nombre
+            if (cognomsComparacion === 0) {
+              return a.nom.localeCompare(b.nom, 'ca');
+            }
+            
+            return cognomsComparacion;
+          });
 
-          // Extract unique values for filters
-          const programacions = [...new Set(data.map((p: DadaPacient) => p.programacio).filter(Boolean))] as string[];
-          const ubicacions = [...new Set(data.map((p: DadaPacient) => p.ubicacio).filter(Boolean))] as string[];
-          
+          setPacients(filteredDataOrdenada);
+          setFilteredPacients(filteredDataOrdenada);
+
+          // Extract unique values for filters and sort them alphabetically
+          // Extract unique values for filters and sort them alphabetically
+          const programacions = Array.from(new Set<string>(data.map((p: DadaPacient) => p.programacio).filter(Boolean) as string[]))
+          .sort((a, b) => a.localeCompare(b, 'ca'));
+
+          const ubicacions = Array.from(new Set<string>(data.map((p: DadaPacient) => p.ubicacio).filter(Boolean) as string[]))
+          .sort((a, b) => a.localeCompare(b, 'ca'));
+
           setProgramacioOptions(programacions);
           setUbicacioOptions(ubicacions);
         }
@@ -203,7 +219,7 @@ const PacientsSala = () => {
                           to={`/pacient/${pacient.id}`} 
                           className="text-blue-600 hover:text-blue-900 font-medium"
                         >
-                          {pacient.nom} {pacient.cognoms}
+                          {pacient.cognoms}, {pacient.nom}
                         </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">

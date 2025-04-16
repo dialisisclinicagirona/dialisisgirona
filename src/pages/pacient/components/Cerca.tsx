@@ -6,10 +6,11 @@ type Pacient = Database['public']['Tables']['pacients']['Row'];
 type PacientLlista = Pick<Database['public']['Tables']['pacients']['Row'], 'id' | 'nom' | 'cognoms'>;
 
 type CercaProps = {
+    reset: number;
     onPacientSelect: (pacient: PacientLlista) => void;
 };
 
-const Cerca = ({onPacientSelect}: CercaProps) => {
+const Cerca = ({reset, onPacientSelect}: CercaProps) => {
     const [pacients, setPacients] = useState<PacientLlista[]>([]);
     const [filteredPacients, setFilteredPacients] = useState<PacientLlista[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -25,22 +26,24 @@ const Cerca = ({onPacientSelect}: CercaProps) => {
     const carregarPacients = async () => {
         setIsLoading(true);
     
-        if (pacients.length == 0 && !dadescarregades) {
-            dadescarregades = true;
+        
+          
             const { data, error } = await supabase
             .from('pacients')
             .select('id, nom, cognoms');
+
 
             if (!error) {
             setPacients(data);
             setFilteredPacients(data);
             }
-        }
+        
       
         setIsLoading(false);
     };
+    console.log("Cerca reset", reset);
     carregarPacients();
-    }, []);
+    }, [reset]);
 
     // Filtrar pacients quan canvia el terme de cerca
     useEffect(() => {
