@@ -85,6 +85,9 @@ const Top = () => {
                     <Link to="/pacient" className={isActive('/pacient')}>
                       <span className="text-white hover:text-gray-100">Pacient</span>
                     </Link>
+                    <Link to="/pacients-sala" className={isActive('/pacients-sala')}>
+                      <span className="text-white hover:text-gray-100">Pacients per Sala</span>
+                    </Link>
                     <Link to="/usuaris" className={isActive('/usuaris')}>
                       <span className="text-white hover:text-gray-100">Usuaris</span>
                     </Link>
@@ -132,6 +135,13 @@ const Top = () => {
                 onClick={() => setMenuOpen(false)}
               >
                 Pacient
+              </Link>
+              <Link
+                to="/pacients-sala"
+                className={`${isActive('/pacients-sala')} block text-white hover:text-gray-100`}
+                onClick={() => setMenuOpen(false)}
+              >
+                Pacients per Sala
               </Link>
               <Link
                 to="/usuaris"

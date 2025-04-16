@@ -22,7 +22,12 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
     const [concsBic, setConcsBic] = useState<Option[]>([]);
     const [segellatsCVC, setSegellatsCVC] = useState<Option[]>([]);
     const opcionsSN = [{ id: "Sí", nom: "Sí" }, { id: "No", nom: "No" }];
-    const opcionsProgramacio = [{ id: "Dl, Dx, Dv", nom: "Dl, Dx, Dv" }, { id: "Dm, Dj, Ds", nom: "Dm, Dj, Ds" }];
+    const opcionsProgramacio = [
+      { id: "Dl, Dx, Dv (Matí)", nom: "Dl, Dx, Dv (Matí)" }, 
+      { id: "Dl, Dx, Dv (Tarda)", nom: "Dl, Dx, Dv (Tarda)" },
+      { id: "Dm, Dj, Ds (Matí)", nom: "Dm, Dj, Ds (Matí)" },
+      { id: "Dm, Dj, Ds (Tarda)", nom: "Dm, Dj, Ds (Tarda)" }
+    ];
     const opcionsBarthel = [{id: "100", nom: "Independent (100)"}, {id: "60-90", nom: "Dependència moderada (60-90)"}, {id: "<60", nom: "Dependència greu (< 60)"}];
     const opcionsPfeiffer = [{id: "0-2", nom: "Normal (0-2)"}, {id: "3-4", nom: "Deteriorament lleu (3-4)"}, {id: "5-7", nom: "Moderat (5-7)"}, {id: "8-10", nom: "Greu (8-10)"}]
     

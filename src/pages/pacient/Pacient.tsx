@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { supabase } from "../../lib/supabaseClient";
 import { DadaPacient, Database } from '../../types/supabase';
 import PacientForm  from './components/Form';
@@ -9,8 +10,17 @@ type Pacient = DadaPacient;
 type PacientLlista = Pick<Database['public']['Tables']['pacients']['Row'], 'id' | 'nom' | 'cognoms'>;
 
 const Pacient = () => {
+  const { id } = useParams<{ id?: string }>();
   const [selectedPacient, setSelectedPacient] = useState<Pacient | null>(null);
   const [allowUpadate, setAllowUpdate] = useState(false);
+  
+  // Carregar pacient automàticament si hi ha un ID a la URL
+  useEffect(() => {
+    if (id) {
+      console.log("Carregant pacient amb ID:", id);
+      fetchPacientDetails(id);
+    }
+  }, [id]); // Executar quan canviï l'ID
   
   const handlePacientChange = (updatedPacient: Pacient) => {
     const hasChanged = JSON.stringify(selectedPacient) !== JSON.stringify(updatedPacient);
