@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "../../lib/supabaseClient";
 import TextInput from "../common/TextInput";
 import PasswordInput from "../common/PasswordInput";
@@ -72,6 +72,11 @@ export default function Login() {
                 prop="contrasenya"
                 onValueChanged={(e) => setContrasenya(e.target.value)}
               />
+              <div className="text-right mt-1">
+                <Link to="/forgot-password" className="text-[#0097A7] hover:text-[#007D90] text-sm font-medium">
+                  Has oblidat la contrasenya?
+                </Link>
+              </div>
             </div>
 
             {error && (
