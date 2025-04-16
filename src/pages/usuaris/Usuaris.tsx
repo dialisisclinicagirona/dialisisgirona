@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase, supabaseAdmin } from '../../lib/supabaseClient';
 import Top from '../topMenu/Top';
 import InputText from '../common/TextInput';
+import SelectInput from '../common/SelectInput';
 
 // Define the Perfil type based on the task description
 interface Perfil {
@@ -9,6 +10,8 @@ interface Perfil {
   nom: string;
   email: string;
   rol: string;
+  email_confirmed_at?: string | null;
+  invitation_sent_at?: string | null;
 }
 
 const Usuaris = () => {
@@ -60,7 +63,38 @@ const Usuaris = () => {
         
         if (error) throw error;
         
-        setPerfils(data || []);
+        // If admin, get verification status for all users
+        if (isAdmin) {
+          const userIds = data?.map(profile => profile.id) || [];
+          
+          // Get user auth data for all profiles
+          const authUsers = await Promise.all(
+            userIds.map(async (userId) => {
+              try {
+                const { data: userData, error: userError } = await supabaseAdmin.auth.admin.getUserById(userId);
+                if (userError) throw userError;
+                return userData?.user;
+              } catch (err) {
+                console.error(`Error fetching auth data for user ${userId}:`, err);
+                return null;
+              }
+            })
+          );
+          
+          // Combine profile data with auth data
+          const profilesWithAuth = data?.map((profile, index) => {
+            const authUser = authUsers[index];
+            return {
+              ...profile,
+              email_confirmed_at: authUser?.email_confirmed_at,
+              invitation_sent_at: authUser?.created_at // Using created_at as proxy for invitation sent date
+            };
+          });
+          
+          setPerfils(profilesWithAuth || []);
+        } else {
+          setPerfils(data || []);
+        }
       } catch (error: any) {
         console.error('Error fetching profiles:', error);
         setError(error.message);
@@ -269,18 +303,17 @@ const Usuaris = () => {
               </div>
               
               <div className="w-full md:w-1/3 px-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Rol
-                </label>
-                <select
-                  value={inviteRole}
-                  onChange={(e) => setInviteRole(e.target.value)}
-                  className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="usuari">Usuari</option>
-                  <option value="admin">Administrador</option>
-                </select>
+                <SelectInput
+                label='Rol'
+                value={inviteRole}
+                prop='rol'
+                options={[
+                  { id: 'usuari', nom: 'Usuari' },
+                  { id: 'admin', nom: 'Administrador' },
+                ]}
+                onValueChanged={(e) => setInviteRole(e.target.value)}
+                />
+                
               </div>
               </div>
               
@@ -309,6 +342,9 @@ const Usuaris = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Rol
                 </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Verificació
+                </th>
                 {isAdmin && (
                   <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Accions
@@ -319,13 +355,13 @@ const Usuaris = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {loading && perfils.length === 0 ? (
                 <tr>
-                  <td colSpan={isAdmin ? 4 : 3} className="px-6 py-4 text-center text-sm text-gray-500">
+                  <td colSpan={isAdmin ? 5 : 4} className="px-6 py-4 text-center text-sm text-gray-500">
                     Carregant usuaris...
                   </td>
                 </tr>
               ) : perfils.length === 0 ? (
                 <tr>
-                  <td colSpan={isAdmin ? 4 : 3} className="px-6 py-4 text-center text-sm text-gray-500">
+                  <td colSpan={isAdmin ? 5 : 4} className="px-6 py-4 text-center text-sm text-gray-500">
                     No hi ha usuaris disponibles
                   </td>
                 </tr>
@@ -359,6 +395,24 @@ const Usuaris = () => {
                         </select>
                       ) : (
                         perfil.rol
+                      )}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      {perfil.email_confirmed_at ? (
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                          Verificat
+                        </span>
+                      ) : (
+                        <div>
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                            Pendent
+                          </span>
+                          {perfil.invitation_sent_at && (
+                            <div className="text-xs text-gray-500 mt-1">
+                              Invitació: {new Date(perfil.invitation_sent_at).toLocaleDateString('ca-ES')}
+                            </div>
+                          )}
+                        </div>
                       )}
                     </td>
                     {isAdmin && (
