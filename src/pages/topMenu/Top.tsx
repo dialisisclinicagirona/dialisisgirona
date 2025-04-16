@@ -16,10 +16,15 @@ const Top = () => {
         const getUser = async () => {
             try {
                 setLoading(true);
-                const { data: { user } } = await supabase.auth.getUser();
+                const { data: { user }, error: authError  } = await supabase.auth.getUser();
+                console.log("user", user, authError);
+                if(authError){
+                  navigate('/');
+                }
                 setUser(user);
             } catch (error) {
                 console.error('Error obtenint usuari:', error);
+                navigate('/');
             } finally {
                 setLoading(false);
             }
@@ -45,7 +50,6 @@ const Top = () => {
 
     const isActive = (path: string) => {
         return location.pathname === path ? 
-         
             'bg-[#007D90] text-white px-3 py-2 rounded-md text-sm font-medium' : 
             'text-gray-300 hover:bg-[#005F73] hover:text-white px-3 py-2 rounded-md text-sm font-medium';
     };

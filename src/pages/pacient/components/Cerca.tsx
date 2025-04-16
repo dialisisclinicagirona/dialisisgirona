@@ -11,7 +11,6 @@ type CercaProps = {
 };
 
 const Cerca = ({onPacientSelect}: CercaProps) => {
-    const navigate = useNavigate();
     const [pacients, setPacients] = useState<PacientLlista[]>([]);
     const [filteredPacients, setFilteredPacients] = useState<PacientLlista[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -26,9 +25,7 @@ const Cerca = ({onPacientSelect}: CercaProps) => {
     useEffect(() => {
     const carregarPacients = async () => {
         setIsLoading(true);
-        const { data: { user }, error: authError } = await supabase.auth.getUser();
-
-        if (user && authError == null) {
+    
         if (pacients.length == 0 && !dadescarregades) {
             dadescarregades = true;
             const { data, error } = await supabase
@@ -40,9 +37,7 @@ const Cerca = ({onPacientSelect}: CercaProps) => {
             setFilteredPacients(data);
             }
         }
-        } else {
-        navigate("/");
-        }
+      
         setIsLoading(false);
     };
     carregarPacients();

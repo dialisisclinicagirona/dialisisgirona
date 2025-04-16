@@ -1,21 +1,8 @@
-# React + TypeScript + Vite
+# DialisisGirona App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+La DialisisGirona App és una aplicació web per a la gestió de pacients amb malaltia renal crònica en trànsit cap a la dialisi. L'aplicació permet als professionals sanitaris gestionar les dades dels pacients, inclòs el seu historial mèdic, els resultats d'anàlisis i les visites mèdiques.
 
-While this project uses React, Vite supports many popular JS frameworks. [See all the supported frameworks](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+L'aplicació també permet a les infermeres accedir a les dades i interaccionar amb els pacients per a obtenir informació sobre els paramètres de la dialisi. 
 
-## Deploy Your Own
 
-Deploy your own Vite project with Vercel.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/vite-react&template=vite-react)
-
-_Live Example: https://vite-react-example.vercel.app_
-
-### Deploying From Your Terminal
-
-You can deploy your new Vite project with a single command from your terminal using [Vercel CLI](https://vercel.com/download):
-
-```shell
-$ vercel
-```
+L'aplicació està desenvolupada amb React, Next.js i Tailwind CSS, i utilitza la base de dades en línia de Supabase per a emmagatzemar les dades dels pacients.
