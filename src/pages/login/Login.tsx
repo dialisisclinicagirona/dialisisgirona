@@ -22,8 +22,10 @@ export default function Login() {
     });
 
     if (error || !user) {
-      throw error || new Error('Usuari no trobat');
+      setError("Usuari o contrasenya incorrectes");
+      return;
     }
+
 
     // Recuperar el perfil de l'usuari associat
     const { data, error: perfilError } = await supabase
@@ -32,9 +34,10 @@ export default function Login() {
       .eq('id', user.id)
       .single();
 
-    if (perfilError || !data) {
-      throw perfilError || new Error('Perfil no trobat');
-    }
+      if (perfilError || !data) {
+        setError("Usuari o contrasenya incorrectes");
+        return;
+      }
     
     // Guardar usuari loguejat (localStorage o context)
     
