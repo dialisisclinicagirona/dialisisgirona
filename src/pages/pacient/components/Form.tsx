@@ -20,6 +20,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
     const [concsBic, setConcsBic] = useState<Option[]>([]);
     const [segellatsCVC, setSegellatsCVC] = useState<Option[]>([]);
     const opcionsSN = [{ id: "Sí", nom: "Sí" }, { id: "No", nom: "No" }];
+    const opcionsProgramacio = [{ id: "Dl, Dx, Dv", nom: "Dl, Dx, Dv" }, { id: "Dm, Dj, Ds", nom: "Dm, Dj, Ds" }];
     
     useEffect(() => {
       const fetchData = async () => {
@@ -38,10 +39,6 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
 
       fetchData();
     }, []);
-
-    useEffect(() => {
-     console.log("Pacient changed", pacient);
-    }, [JSON.stringify(pacient)]);
 
     const fetchAnticoagulants = async (): Promise<Option[]> => {
       const { data, error } = await supabase
@@ -197,29 +194,25 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-programacio">
-                      Programació
-                    </label>
-                    <select className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                       id="grid-programacio" 
-                      name="programacio"
-                      value={pacient.programacio ?? ''}
-                      onChange={handleChange}
-                      onBlur={(onSubmitChange)}>
-                      <option value="">Selecciona</option>
-                      <option value="Dl, Dx, Dv">Dl, Dx, Dv</option>
-                      <option value="Dm, Dj, Ds">Dm, Dj, Ds</option>
-                    </select>
-                  </div>
-                  <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                  <InputText
-                      label="Ubicació" 
-                      value={pacient.ubicacio}
-                      prop="ubicacio"
+                    <SelectInput
+                      label="Programació"
+                      value={pacient.programacio}
+                      prop="programacio"
+                      options={opcionsProgramacio}
                       onValueChanged={handleChange}
                       onSubmit={onSubmitChange}
                     />
                   </div>
+                  <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+                    <InputText
+                        label="Ubicació" 
+                        value={pacient.ubicacio}
+                        prop="ubicacio"
+                        onValueChanged={handleChange}
+                        onSubmit={onSubmitChange}
+                      />
+                  </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="Llit"
@@ -236,15 +229,16 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                 <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Pauta</h3>
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                  <SelectInput
-                    label="Anticoagulant"
-                    value={pacient.anticoagulant?.toString() ?? ''}
-                    prop="anticoagulant"
-                    options={anticoagulants}
-                    onValueChanged={handleChange}
-                    onSubmit={onSubmitChange}
-                  />
+                    <SelectInput
+                      label="Anticoagulant"
+                      value={pacient.anticoagulant?.toString() ?? ''}
+                      prop="anticoagulant"
+                      options={anticoagulants}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
+                    />
                   </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <SelectInput
                       label="Dialitzador"
@@ -255,6 +249,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       onSubmit={onSubmitChange}
                     />
                   </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <SelectInput
                       label="Concentració Acid"
@@ -265,6 +260,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       onSubmit={onSubmitChange}
                     />
                   </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <SelectInput
                       label="Concentració Bicarbonat"
@@ -290,6 +286,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       onSubmit={onSubmitChange}
                     />
                   </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="NA (mmol/L)"
@@ -299,6 +296,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       onSubmit={onSubmitChange}
                     />
                   </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="Tª Líquid (ºC)"
@@ -308,6 +306,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       onSubmit={onSubmitChange}
                     />
                   </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="OCM/KtV objectiu"
@@ -332,6 +331,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       onSubmit={onSubmitChange}
                     />
                   </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <InputText
                       label="UF màx. horària (ml/h)"
@@ -341,6 +341,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       onSubmit={onSubmitChange}
                     />
                   </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <SelectInput
                       label="Tolerancia UF seca"
@@ -351,6 +352,7 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                       onSubmit={onSubmitChange}
                     />
                   </div>
+
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <SelectInput
                       label="Perfil UF"
