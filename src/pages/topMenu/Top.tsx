@@ -77,7 +77,7 @@ const Top = () => {
               {/* Logo i enllaços de navegació */}
               <div className="flex-1 flex items-center justify-start ps-12 sm:ps-0 sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
-                  <img className="block h-8 w-auto me-3" src="./clinicaGirona32.png" alt="Workflow" />
+                  <img className="block h-8 w-auto me-3" src="../clinicaGirona32.png" alt="Workflow" />
                   <span className="hidden md:block text-white font-bold text-xl">Diàlisis App</span>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
