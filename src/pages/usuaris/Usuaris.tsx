@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase, supabaseAdmin } from '../../lib/supabaseClient';
 import Top from '../topMenu/Top';
-import InputText from '../common/InputText';
+import InputText from '../common/TextInput';
 
 // Define the Perfil type based on the task description
 interface Perfil {

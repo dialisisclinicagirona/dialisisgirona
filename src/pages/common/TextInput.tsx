@@ -8,7 +8,7 @@ type InputProps = {
     onValueChanged?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onSubmit?: () => void;
 };
-const InputText = ({label, value, prop, onValueChanged, onSubmit}: InputProps) => {
+const TextInput = ({label, value, prop, onValueChanged, onSubmit}: InputProps) => {
     return (
     <>
         <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor={`grid-${prop}`}>
@@ -24,4 +24,4 @@ const InputText = ({label, value, prop, onValueChanged, onSubmit}: InputProps) =
     </>);
 };
 
-export default InputText;
+export default TextInput;

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import { DadaPacient, Option } from "../../../types/supabase";
-import InputText from "../../common/InputText";
-import SelectInput from "../../common/Selector";
+import InputText from "../../common/TextInput";
+import SelectInput from "../../common/SelectInput";
+import DateInput from "../../common/DateInput";
 
 type Pacient = DadaPacient;
 type FormProps = {
@@ -146,17 +147,13 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
 
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
-
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-naixement">
-                      Data de naixement
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="grid-naixement" 
-                    name="data_naixement"
-                    type="text" 
-                    value={pacient.data_naixement?.toString() || ''}
-                    onChange={handleChange}
-                    onBlur={(onSubmitChange)} />
+                    <DateInput
+                      label="Data de naixement"
+                      name="data_naixement"
+                      value={pacient.data_naixement || ""}
+                      onChange={handleChange}
+                      onBlur={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
                     <InputText 
@@ -190,17 +187,13 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                 <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Diàlisi</h3>
                 <div className="flex flex-wrap -mx-3 mb-4">
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-
-                    <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-inicihd">
-                      Data inici HD
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-inicihd" 
+                    <DateInput
+                      label="Data inici HD"
                       name="data_inici_HD"
-                      type="text" 
-                      value={pacient.data_inici_HD?.toString() ?? ''}
+                      value={pacient.data_inici_HD || ""}
                       onChange={handleChange}
-                      onBlur={(onSubmitChange)}/>
+                      onBlur={onSubmitChange}
+                    />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     
