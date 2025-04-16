@@ -15,7 +15,7 @@ type FormProps = {
 };
 
 const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
-    const [tab, setTap] = useState("form-general");
+    const [tab, setTab] = useState("form-general");
     const [anticoagulants, setAnticoagulants] = useState<Option[]>([]);
     const [dialitzadors, setDialitzadors] = useState<Option[]>([]);
     const [concsAcid, setConcsAcid] = useState<Option[]>([]);
@@ -557,21 +557,17 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
             {/* Navegació a la part inferior només en mòbil */}
             <div className="fixed bottom-0 left-0 right-0 sm:hidden bg-white border-t border-gray-200 shadow-md">
               <ul className="text-sm font-medium text-center text-gray-500 flex">
-                <li className="w-1/4 focus-within:z-10">
-                  <button type="button" className="inline-block w-full p-4 text-gray-900 bg-gray-50 border-r border-gray-200 focus:ring-4 focus:ring-blue-300 active focus:outline-none" aria-current="page"
-                    onClick={() => setTap("form-general")}>General</button>
+                <li className="w-1/3 focus-within:z-10">
+                  <button type="button" className={`${tab == "form-general"? "bg-gray-50 text-gray-900 ": "bg-white hover:text-gray-700 hover:bg-gray-50 "}inline-block w-full p-4 border-r border-gray-200 focus:ring-4 focus:ring-blue-300 focus:outline-none`}
+                    aria-current="page" onClick={() => setTab("form-general")}>Dades del Pacient</button>
                 </li>
-                <li className="w-1/4 focus-within:z-10">
-                  <button className="inline-block w-full p-4 bg-white border-r border-gray-200 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none"
-                    onClick={() => setTap("form-dialisi")}>Dades de diàlisi</button>
+                <li className="w-1/3 focus-within:z-10">
+                  <button type="button" className={`${tab == "form-dialisi"? "bg-gray-50 text-gray-900 ": "bg-white hover:text-gray-700 hover:bg-gray-50 "}inline-block w-full p-4 border-r border-gray-200 focus:ring-4 focus:ring-blue-300 focus:outline-none`}
+                    aria-current="page" onClick={() => setTab("form-dialisi")}>Paràmetres de Diàlisi</button>
                 </li>
-                <li className="w-1/4 focus-within:z-10">
-                  <button className="inline-block w-full p-4 bg-white border-r border-gray-200 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none"
-                    onClick={() => setTap("form-venos")}>Accès venós</button>
-                </li>
-                <li className="w-1/4 focus-within:z-10">
-                  <button className="inline-block w-full p-4 bg-white border-s-0 border-gray-200 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300"
-                    onClick={() => setTap("a")}>Pacient</button>
+                <li className="w-1/3 focus-within:z-10">
+                  <button type="button" className={`${tab == "form-venos"? "bg-gray-50 text-gray-900 ": "bg-white hover:text-gray-700 hover:bg-gray-50 "}inline-block w-full p-4 border-r border-gray-200 focus:ring-4 focus:ring-blue-300 focus:outline-none`}
+                    aria-current="page" onClick={() => setTab("form-venos")}>Accès Vascular Hemostàsia</button>
                 </li>
               </ul>
             </div>
