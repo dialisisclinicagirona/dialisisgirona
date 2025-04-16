@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabaseClient";
+import PasswordInput from "../common/PasswordInput";
 
 export default function SetPassword() {
   const navigate = useNavigate();
@@ -92,27 +93,22 @@ export default function SetPassword() {
             <h2 className="text-xl font-semibold mb-4 text-center">Estableix la teva contrasenya</h2>
             <form onSubmit={handleSetPassword} className="space-y-4">
               <div>
-                <label className="block text-sm mb-1">Nova contrasenya</label>
-                <input
-                  type="password"
+                <PasswordInput
+                  label="Nova Contrasenya"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full border rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                  minLength={8}
+                  prop="password"
+                  onValueChanged={(e) => setPassword(e.target.value)}
                 />
               </div>
 
               <div>
-                <label className="block text-sm mb-1">Confirma la contrasenya</label>
-                <input
-                  type="password"
+                <PasswordInput
+                  label="Confirma la contrasenya"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full border rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                  minLength={8}
+                  prop="confirmPassword"
+                  onValueChanged={(e) => setConfirmPassword(e.target.value)}
                 />
+                
               </div>
 
               {error && (
