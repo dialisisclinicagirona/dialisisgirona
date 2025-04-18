@@ -182,6 +182,12 @@ const PacientView = () => {
     }
   };
 
+  const handleImprimir = () => {
+    if (selectedPacient) {
+      window.open(`/imprimir/${selectedPacient.id}`, '_new');
+    }   
+  };
+
   return (
     <>
     <Top />
@@ -200,12 +206,20 @@ const PacientView = () => {
             </button>
           )}
           {selectedPacient && selectedPacient.id && (
-            <button 
-              onClick={handleDeletePacient}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+            <>
+              <button 
+                onClick={handleDeletePacient}
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 mr-2 rounded"
+              >
+                Esborrar Pacient
+              </button>
+              <button 
+              onClick={handleImprimir}
+              className="bg-grey-50 border border-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded"
             >
-              Esborrar Pacient
+              Imprimir
             </button>
+          </>
           )}
         </div>
       </div>

@@ -5,6 +5,7 @@ import Usuaris from './pages/usuaris/Usuaris';
 import SetPassword from './pages/set-password/SetPassword';
 import ForgotPassword from './pages/forgot-password/ForgotPassword';
 import PacientsSala from './pages/pacients-sala/PacientsSala';
+import ImprimirPacient from "./pages/imprimir/Imprimir";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/pacient" element={<Pacient />} />  {/* Aquesta es la pàgina de pacients */}
         <Route path="/pacient/:id" element={<Pacient />} />  {/* Ruta amb paràmetre ID del pacient */}
+        <Route path="/imprimir/:id" element={<ImprimirPacient />} />
         <Route path="/usuaris" element={<Usuaris />} />
         <Route path="/pacients-sala" element={<PacientsSala />} />  {/* Nova pàgina de pacients per programació */}
         <Route path="/set-password" element={<SetPassword />} />
