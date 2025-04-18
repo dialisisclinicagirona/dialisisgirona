@@ -193,7 +193,7 @@ const PacientView = () => {
           {((!selectedPacient) || (selectedPacient && selectedPacient.id)) && (
             <button 
               onClick={handleCreateNewPacient}
-              className="bg-[#0097A7] hover:bg-[#2cc0d0] text-white font-bold py-2 px-4 rounded"
+              className="bg-[#0097A7] hover:bg-[#2cc0d0] text-white font-bold py-2 px-4"
             >
               Nou Pacient
             </button>
@@ -201,7 +201,7 @@ const PacientView = () => {
           {selectedPacient && selectedPacient.id && (
             <button 
               onClick={handleDeletePacient}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4"
             >
               Esborrar Pacient
             </button>
