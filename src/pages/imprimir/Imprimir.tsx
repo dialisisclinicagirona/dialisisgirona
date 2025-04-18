@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { supabase } from "../../lib/supabaseClient";
 import './ImprimirPacient.css';
 import { DadaPacient } from '../../types/supabase';
