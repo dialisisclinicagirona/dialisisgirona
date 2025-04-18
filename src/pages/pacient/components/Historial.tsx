@@ -84,13 +84,6 @@ const HistorialCanvis = ({ pacientId, reset }: HistorialCanvisProps) => {
     setLoading(false);
   };
 
-  // Formata la data i hora en format català
-  const formatarDataHora = (dataHora: string) => {
-    return format(new Date(dataHora), "d MMMM yyyy, HH:mm", { locale: ca });
-  };
-
-  // Afegeix això a la funció HistorialCanvis després del carregarHistorial useEffect
-
 // Renderitza la taula d'historial de canvis
 return (
   <div className="container mx-auto px-4 py-6">
