@@ -1,0 +1,175 @@
+/* Estils per la pàgina d'impressió de pacients */
+.imprimir-pacient {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .pagina-impressio {
+    background: white;
+    width: 210mm;
+    min-height: 300mm;
+    margin: 0 auto;
+    padding: 10mm 15mm;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .capcalera {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .data-impressio {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .seccio-dades {
+    page-break-inside: avoid;
+    border: solid 1px #999;
+    margin: 10px 0;
+    padding: 10px;
+  }
+  
+  .seccio-dades h3 {
+    font-size: 16px;
+    color:#999;
+    text-decoration: underline;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  .camp {
+    margin-bottom: 8px;
+  }
+  
+  .full-width {
+    grid-column: 1 / -1;
+  }
+  
+  .etiqueta-inline {
+    font-weight: bold;
+    font-size: 12px;
+    color: #999;
+    display: inline;
+    margin-bottom: 2px;
+    padding-right:10px;
+  }
+
+  .etiqueta {
+    font-weight: bold;
+    font-size: 12px;
+    color: #999;
+    display: block;
+    margin-bottom: 2px;
+  }
+  
+  .valor {
+    font-size: 14px;
+  }
+  
+  .multi-linia {
+    white-space: pre-line;
+    display: block;
+    padding: 5px;
+    background: #f9f9f9;
+    border-radius: 3px;
+    min-height: 40px;
+  }
+  
+  .peu-pagina {
+    margin-top: 50px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #888;
+  }
+  
+  /* Controls per a la pantalla (no s'imprimeixen) */
+  .controls {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    max-width: 210mm;
+    margin: 0 auto 20px auto;
+  }
+  
+  .btn-tornar,
+  .btn-print {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .btn-tornar {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .btn-print {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .carregant,
+  .error {
+    text-align: center;
+    padding: 50px;
+    font-size: 18px;
+  }
+  
+  .error {
+    color: #d32f2f;
+  }
+  
+  /* Estils específics per a impressió */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    
+    .imprimir-pacient {
+      background: none;
+      padding: 0;
+    }
+    
+    .pagina-impressio {
+      box-shadow: none;
+      padding: 0;
+      width: 100%;
+      min-height: auto;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Evitar talls de seccions entre pàgines */
+    .seccio-dades {
+      page-break-inside: avoid;
+    }
+  }
