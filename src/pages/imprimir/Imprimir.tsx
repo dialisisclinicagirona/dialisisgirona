@@ -6,7 +6,6 @@ import { DadaPacient } from '../../types/supabase';
 
 const ImprimirPacient = () => {
     const { id } = useParams<{ id: string }>();
-    const navigate = useNavigate();
     const [pacient, setPacient] = useState<DadaPacient | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
