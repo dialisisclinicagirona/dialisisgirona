@@ -13,7 +13,7 @@ const PacientView = () => {
   const { id } = useParams<{ id?: string }>();
   const [selectedPacient, setSelectedPacient] = useState<DadaPacient | null>(null);
   const [allowUpadate, setAllowUpdate] = useState(false);
-  const [resetCerca, setResetCerca] = useState(Date.now());
+  const [resetDades, setResetDades] = useState(Date.now());
   
   // Carregar pacient automàticament si hi ha un ID a la URL
   useEffect(() => {
@@ -77,14 +77,15 @@ const PacientView = () => {
 
         console.log('Pacient actualitzat:', data);
         setAllowUpdate(false);
-        setResetCerca(Date.now());
+        
         return data;
       }
-      
       return null;
     } catch (error) {
       console.error('Error actualitzant/creant pacient:', error);
       return null;
+    } finally {
+      setResetDades(Date.now());
     }
   }
 
@@ -174,7 +175,7 @@ const PacientView = () => {
         
         console.log('Pacient esborrat correctament');
         setSelectedPacient(null); // Netejar l'estat del pacient seleccionat
-        setResetCerca(Date.now());
+        setResetDades(Date.now());
       } catch (error) {
         console.error('Error esborrant pacient:', error);
       }
@@ -187,7 +188,7 @@ const PacientView = () => {
     <div className="max-w-250 mx-auto p-6">
       <div className="flex flex-wrap justify-between items-center">
         <div className="w-full md:w-1/2 mb-4 md:mt-0">
-          <Cerca onPacientSelect={handlePacientSelect} reset={resetCerca} />
+          <Cerca onPacientSelect={handlePacientSelect} reset={resetDades} />
         </div>
         <div className="w-full md:w-1/2 md:text-right">
           {((!selectedPacient) || (selectedPacient && selectedPacient.id)) && (
@@ -214,6 +215,7 @@ const PacientView = () => {
           pacient={selectedPacient} 
           onPacientChange={handlePacientChange}
           onSubmitChange={handleSubmitPacient}
+          reset={resetDades}
         />
       )}
     </div>

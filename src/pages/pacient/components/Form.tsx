@@ -6,15 +6,17 @@ import SelectInput from "../../common/SelectInput";
 import DateInput from "../../common/DateInput";
 import TextInput from "../../common/TextInput";
 import TextAreaInput from "../../common/TextAreaInput";
+import HistorialCanvis from "./Historial";
 
 type Pacient = DadaPacient;
 type FormProps = {
     pacient: Pacient;
+    reset: number;
     onPacientChange?: (updatedPacient: Pacient) => void;
     onSubmitChange?: () => void;
 };
 
-const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
+const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProps) => {
     const [tab, setTab] = useState("form-general");
     const [anticoagulants, setAnticoagulants] = useState<Option[]>([]);
     const [dialitzadors, setDialitzadors] = useState<Option[]>([]);
@@ -152,6 +154,15 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                   onClick={() => setTab("form-venos")}
                 >
                   Accès Vascular Hemostàsia
+                </button>
+              </li>
+              <li>
+                <button 
+                  type="button" 
+                  className={`inline-block p-4 rounded-t-lg ${tab === "form-historial" ? "text-blue-600 bg-gray-50 border-b-2 border-blue-600 active" : "hover:text-gray-600 hover:bg-gray-50"}`}
+                  onClick={() => setTab("form-historial")}
+                >
+                  Historial de canvis
                 </button>
               </li>
             </ul>
@@ -590,6 +601,11 @@ const PacientForm = ({pacient, onPacientChange, onSubmitChange}: FormProps) => {
                 </div>
               </div>
           </div>
+
+          <div id="form-historial" className={`${tab !== "form-historial"? "hidden ":""} md:my-6`} role="tabpanel" aria-labelledby="profile-tab">
+              <HistorialCanvis pacientId={pacient.id} reset={reset} />
+          </div>
+
 
             {/* Navegació a la part inferior només en mòbil */}
             <div className="fixed bottom-0 left-0 right-0 sm:hidden bg-white border-t border-gray-200 shadow-md">
