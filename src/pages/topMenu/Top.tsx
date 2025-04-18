@@ -106,7 +106,7 @@ const Top = () => {
                       <span className="text-white text-sm md:text-base mr-2">{user.email}</span>
                       <button
                         onClick={handleLogout} title='Tancar la sessió'
-                        className="bg-[#007D90] py-1 px-2 rounded-full text-white hover:bg-[#005F73] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0097A7] focus:ring-white cursor-pointer"
+                        className="py-1 px-2 rounded-full text-white hover:bg-[#005F73] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0097A7] focus:ring-white cursor-pointer"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 rotate-180">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
