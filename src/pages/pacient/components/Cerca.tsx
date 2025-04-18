@@ -19,8 +19,6 @@ const Cerca = ({reset, onPacientSelect}: CercaProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const searchRef = useRef<HTMLDivElement>(null);
 
-    let dadescarregades = false;
-
     // Carregar pacients inicials
     useEffect(() => {
     const carregarPacients = async () => {
