@@ -185,15 +185,15 @@ const PacientView = () => {
     <>
     <Top />
     <div className="max-w-250 mx-auto p-6">
-      <div className="flex justify-between items-center mb-4">
-        <div className="w-full md:w-1/2">
+      <div className="flex flex-wrap justify-between items-center">
+        <div className="w-full md:w-1/2 mb-4 md:mt-0">
           <Cerca onPacientSelect={handlePacientSelect} reset={resetCerca} />
         </div>
-        <div className="flex space-x-2">
+        <div className="w-full md:w-1/2 md:text-right">
           {((!selectedPacient) || (selectedPacient && selectedPacient.id)) && (
             <button 
               onClick={handleCreateNewPacient}
-              className="bg-[#0097A7] hover:bg-[#2cc0d0] text-white font-bold py-2 px-4"
+              className="bg-[#0097A7] hover:bg-[#2cc0d0] text-white font-bold py-2 px-4 mr-2 rounded"
             >
               Nou Pacient
             </button>
@@ -201,7 +201,7 @@ const PacientView = () => {
           {selectedPacient && selectedPacient.id && (
             <button 
               onClick={handleDeletePacient}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4"
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
             >
               Esborrar Pacient
             </button>
