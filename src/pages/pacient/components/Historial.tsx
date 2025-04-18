@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from "../../../lib/supabaseClient";
 import { format } from 'date-fns';
-import { ca, ht } from 'date-fns/locale';
+import { ca } from 'date-fns/locale';
 
 interface CanviHistorial {
   id: number;
