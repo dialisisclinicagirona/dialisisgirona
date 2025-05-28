@@ -7,6 +7,7 @@ import DateInput from "../../common/DateInput";
 import TextInput from "../../common/TextInput";
 import TextAreaInput from "../../common/TextAreaInput";
 import HistorialCanvis from "./Historial";
+import { formatDate } from "../../common/Utils";
 
 type Pacient = DadaPacient;
 type FormProps = {
@@ -346,7 +347,26 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
                 
                 <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Dades pacient</h3>
                 <div className="flex flex-wrap -mx-3 mb-4">
-                  <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
+                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+                    <InputText 
+                      label="CIP"
+                      value={pacient.cip ?? ''}
+                      prop="cip"
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange} 
+                    />
+                  </div>
+                  <div className="w-full md:w-1/6 px-2 mb-4 md:mb-0">
+                    <SelectInput
+                      label="Entitat Asseguarança"
+                      value={pacient.entitat?.toString() ?? ''}
+                      prop="entitat"
+                      options={enitatsAsseguranca}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
+                    />
+                  </div>
+                  <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <DateInput
                       label="Data de naixement"
                       name="data_naixement"
@@ -364,25 +384,7 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
                       onSubmit={onSubmitChange} 
                     />
                   </div>
-                  <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
-                    <InputText 
-                      label="Població"
-                      value={pacient.poblacio}
-                      prop="poblacio"
-                      onValueChanged={handleChange}
-                      onSubmit={onSubmitChange} 
-                    />
-                  </div>
-                  <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
-                    <SelectInput
-                      label="Entitat Asseguarança"
-                      value={pacient.entitat?.toString() ?? ''}
-                      prop="entitat"
-                      options={enitatsAsseguranca}
-                      onValueChanged={handleChange}
-                      onSubmit={onSubmitChange}
-                    />
-                    </div>
+                  
                 </div>
               </div>
             </div>
@@ -450,12 +452,22 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
                     <TextInput
-                      label="Pes sec (kg)"
+                      label="Pes sec pauta (kg)"
                       value={pacient.pes_sec?.toString() ?? ''}
                       prop="pes_sec"
                       onValueChanged={handleChange}
                       onSubmit={onSubmitChange}
                     />
+                  </div>
+                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+                    <TextInput
+                      label="Pes sec tolerat (kg)"
+                      value={pacient.pes_sec_tolerat?.toString() ?? ''}
+                      prop="pes_sec_tolerat"
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
+                    />
+                    {pacient.ultima_actualitzacio_pes_tolerat && <p className="text-sm text-gray-600">Darrera actualització: {formatDate(pacient.ultima_actualitzacio_pes_tolerat)}</p>}
                   </div>
                 </div>
 
