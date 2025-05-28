@@ -3,6 +3,8 @@ import { DadaPacient, Option } from "../../types/supabase";
 type Pacient = DadaPacient;
 
 type SelectProps = {
+  required?: boolean;
+  selectText?: string;
   label: string;
   value: string;
   prop: keyof Pacient | string;
@@ -11,7 +13,7 @@ type SelectProps = {
   onSubmit?: () => void;
 };
 
-const SelectInput = ({ label, value, prop, options, onValueChanged, onSubmit }: SelectProps) => {
+const SelectInput = ({ required, selectText, label, value, prop, options, onValueChanged, onSubmit }: SelectProps) => {
   return (
     <>
       <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor={`grid-${prop}`}>
@@ -25,7 +27,8 @@ const SelectInput = ({ label, value, prop, options, onValueChanged, onSubmit }: 
         onChange={onValueChanged}
         onBlur={onSubmit}
       >
-        <option value="">Selecciona</option>
+
+        {!required && <option value="">{selectText || "Selecciona"}</option>}
         {options.map((option) => (
           <option key={option.id} value={option.id}>
             {option.nom}

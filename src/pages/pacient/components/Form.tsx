@@ -18,16 +18,30 @@ type FormProps = {
 
 const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProps) => {
     const [tab, setTab] = useState("form-general");
+    const [enitatsAsseguranca, setEnitatsAsseguranca] = useState<Option[]>([]);
     const [anticoagulants, setAnticoagulants] = useState<Option[]>([]);
     const [dialitzadors, setDialitzadors] = useState<Option[]>([]);
     const [concsAcid, setConcsAcid] = useState<Option[]>([]);
     const [concsBic, setConcsBic] = useState<Option[]>([]);
     const [segellatsCVC, setSegellatsCVC] = useState<Option[]>([]);
     const opcionsSN = [{ id: "Sí", nom: "Sí" }, { id: "No", nom: "No" }];
+    const opcionsDiabetis = [{id: "Tipus I", nom: "Tipus I"}, {id: "Tipus II", nom: "Tipus II"}];
+    const opcionsUbicacio = [
+      {id: "Sala 1", nom: "Sala 1"}, 
+      {id: "Sala 2", nom: "Sala 2"}, 
+      {id: "Sala 3", nom: "Sala 3"}, 
+      {id: "Sala 4", nom: "Sala 4"}, 
+      {id: "Sala 5", nom: "Sala 5"},
+      {id: "Hosp. Olot", nom: "Hosp. Olot"}
+    ];
     const opcionsProgramacio = [
       { id: "Dl, Dx, Dv (Matí)", nom: "Dl, Dx, Dv (Matí)" }, 
+      { id: "Dl, Dx, Dv (Mig Matí)", nom: "Dl, Dx, Dv (Mig Matí)" }, 
+      { id: "Dl, Dx, Dv (Mitja Tarda)", nom: "Dl, Dx, Dv (Mitja Tarda)" }, 
       { id: "Dl, Dx, Dv (Tarda)", nom: "Dl, Dx, Dv (Tarda)" },
       { id: "Dm, Dj, Ds (Matí)", nom: "Dm, Dj, Ds (Matí)" },
+      { id: "Dm, Dj, Ds (Mig Matí)", nom: "Dm, Dj, Ds (Mig Matí)" }, 
+      { id: "Dm, Dj, Ds (Mitja Tarda)", nom: "Dm, Dj, Ds (Mitja Tarda)" }, 
       { id: "Dm, Dj, Ds (Tarda)", nom: "Dm, Dj, Ds (Tarda)" }
     ];
     const opcionsBarthel = [{id: "100", nom: "Independent (100)"}, {id: "60-90", nom: "Dependència moderada (60-90)"}, {id: "<60", nom: "Dependència greu (< 60)"}];
@@ -35,11 +49,13 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
     
     useEffect(() => {
       const fetchData = async () => {
+        const e = await fetchEnitatsAsseguranca();
         const a = await fetchAnticoagulants();
         const d = await fetchDialitzadors();
         const ca = await fetchConcentracionsAcid();
         const cb = await fetchConcentracionsBicarbonat();
         const sc = await fetchSegellatsCVC();
+        setEnitatsAsseguranca(e);
         setAnticoagulants(a);
         setDialitzadors(d);
         setConcsAcid(ca);
@@ -49,6 +65,21 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
 
       fetchData();
     }, []);
+
+    const fetchEnitatsAsseguranca = async (): Promise<Option[]> => {
+      const { data, error } = await supabase
+        .from('entitat_asseg')
+        .select('*');
+
+      if (error) {
+        console.error("Error obtenint enitats asseguranca:", error.message);
+        return [];
+      }
+
+      console.info("entitats", data);
+    
+      return data;
+    };
 
     const fetchAnticoagulants = async (): Promise<Option[]> => {
       const { data, error } = await supabase
@@ -228,7 +259,7 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
                   </div>
                   <div className="w-full md:w-1/4 px-2">
                     <SelectInput
-                      label="Mal. Pul. Obstructiva Crònica"
+                      label="M.P.O.C."
                       value={pacient.mpoc}
                       prop="mpoc"
                       options={opcionsSN}
@@ -237,10 +268,12 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
                       />
                   </div>
                   <div className="w-full md:w-1/4 px-2">
-                    <TextInput
+                    <SelectInput
+                      selectText="No"
                       label="Diabetis Mellitus"
                       value={pacient.dm}
                       prop="dm"
+                      options={opcionsDiabetis}
                       onValueChanged={handleChange}
                       onSubmit={onSubmitChange}
                       />
@@ -331,7 +364,25 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
                       onSubmit={onSubmitChange} 
                     />
                   </div>
-                  
+                  <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
+                    <InputText 
+                      label="Població"
+                      value={pacient.poblacio}
+                      prop="poblacio"
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange} 
+                    />
+                  </div>
+                  <div className="w-full md:w-1/3 px-2 mb-4 md:mb-0">
+                    <SelectInput
+                      label="Entitat Asseguarança"
+                      value={pacient.entitat?.toString() ?? ''}
+                      prop="entitat"
+                      options={enitatsAsseguranca}
+                      onValueChanged={handleChange}
+                      onSubmit={onSubmitChange}
+                    />
+                    </div>
                 </div>
               </div>
             </div>
@@ -366,10 +417,11 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
                     />
                   </div>
                   <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
-                    <InputText
+                    <SelectInput
                         label="Ubicació" 
                         value={pacient.ubicacio}
                         prop="ubicacio"
+                        options={opcionsUbicacio}
                         onValueChanged={handleChange}
                         onSubmit={onSubmitChange}
                       />
