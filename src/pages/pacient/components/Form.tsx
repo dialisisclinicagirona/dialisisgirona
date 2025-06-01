@@ -143,16 +143,7 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
     
       return data;
     };
-
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
-      if (onPacientChange) {
-        onPacientChange({
-          ...pacient,
-          [e.target.name]: e.target.value || null
-        });
-      }
-    };
-
+    
     return (
         <div className="mt-6">
           {/* Tabs per a pantalles més grans */}
