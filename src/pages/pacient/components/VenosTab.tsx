@@ -39,17 +39,17 @@ const VenosTab = ({
       const pacientTemp = { ...pacient };
       const value = e.target.value;
       if(value === "No") {
-        pacientTemp.fav_tecnica = undefined;
+        pacientTemp.fav_tecnica = null;
         pacientTemp.fav_ecoguiada = "";
         pacientTemp.agullaA = "";
         pacientTemp.agullaV = "";
-        pacientTemp.agullaA_mida = undefined;
-        pacientTemp.agullaV_mida = undefined;
+        pacientTemp.agullaA_mida = null;
+        pacientTemp.agullaV_mida = null;
         pacientTemp.hemostasia = "";
         pacientTemp.hemostasia_temps = "";
         pacientTemp.trans_flux_acces = "";
         pacientTemp.trans_recirculacio = "";
-        pacientTemp.trans_propera_revisio = undefined;
+        pacientTemp.trans_propera_revisio = null;
         pacientTemp.fav_comentaris = "";
 
       }

@@ -22,29 +22,7 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
     const [concsAcid, setConcsAcid] = useState<Option[]>([]);
     const [concsBic, setConcsBic] = useState<Option[]>([]);
     const [favTecniques, setFavTecniques] = useState<Option[]>([]);
-    // const opcionsSN = [{ id: "Sí", nom: "Sí" }, { id: "No", nom: "No" }];
-    // const opcionsDiabetis = [{id: "Tipus I", nom: "Tipus I"}, {id: "Tipus II", nom: "Tipus II"}];
-    // const opcionsUbicacio = [
-    //   {id: "Sala 1", nom: "Sala 1"}, 
-    //   {id: "Sala 2", nom: "Sala 2"}, 
-    //   {id: "Sala 3", nom: "Sala 3"}, 
-    //   {id: "Sala 4", nom: "Sala 4"}, 
-    //   {id: "Sala 5", nom: "Sala 5"},
-    //   {id: "Hosp. Olot", nom: "Hosp. Olot"}
-    // ];
-    // const opcionsProgramacio = [
-    //   { id: "Dl, Dx, Dv (Matí)", nom: "Dl, Dx, Dv (Matí)" }, 
-    //   { id: "Dl, Dx, Dv (Mig Matí)", nom: "Dl, Dx, Dv (Mig Matí)" }, 
-    //   { id: "Dl, Dx, Dv (Mitja Tarda)", nom: "Dl, Dx, Dv (Mitja Tarda)" }, 
-    //   { id: "Dl, Dx, Dv (Tarda)", nom: "Dl, Dx, Dv (Tarda)" },
-    //   { id: "Dm, Dj, Ds (Matí)", nom: "Dm, Dj, Ds (Matí)" },
-    //   { id: "Dm, Dj, Ds (Mig Matí)", nom: "Dm, Dj, Ds (Mig Matí)" }, 
-    //   { id: "Dm, Dj, Ds (Mitja Tarda)", nom: "Dm, Dj, Ds (Mitja Tarda)" }, 
-    //   { id: "Dm, Dj, Ds (Tarda)", nom: "Dm, Dj, Ds (Tarda)" }
-    // ];
-    // const opcionsBarthel = [{id: "100", nom: "Independent (100)"}, {id: "60-90", nom: "Dependència moderada (60-90)"}, {id: "<60", nom: "Dependència greu (< 60)"}];
-    // const opcionsPfeiffer = [{id: "0-2", nom: "Normal (0-2)"}, {id: "3-4", nom: "Deteriorament lleu (3-4)"}, {id: "5-7", nom: "Moderat (5-7)"}, {id: "8-10", nom: "Greu (8-10)"}]
-    
+   
     useEffect(() => {
       const fetchData = async () => {
         const e = await fetchEnitatsAsseguranca();
