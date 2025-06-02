@@ -243,11 +243,11 @@ const ImprimirPacient = () => {
               </div>
               <div className="camp">
                 <span className="etiqueta-inline">Accès Vascular:</span>
-                <span className="valor">{pacient.acces_vascular || '-'}</span>
+                <span className="valor">{pacient.trans_flux_acces || '-'}</span>
               </div>
               <div className="camp">
                 <span className="etiqueta-inline">Segellat CVC:</span>
-                <span className="valor">{pacient.segellat_cvc_nom || '-'}</span>
+                <span className="valor">{pacient.fav_tecnica || '-'}</span>
               </div>
               <div className="camp">
                 <span className="etiqueta-inline">Hemostasia:</span>

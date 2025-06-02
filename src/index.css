@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+select:disabled, input:disabled {
+    color:#ccc;
+}

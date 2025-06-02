@@ -9,11 +9,12 @@ type SelectProps = {
   value: string;
   prop: keyof Pacient | string;
   options: Option[];
+  disabled?: boolean;
   onValueChanged?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onSubmit?: () => void;
 };
 
-const SelectInput = ({ required, selectText, label, value, prop, options, onValueChanged, onSubmit }: SelectProps) => {
+const SelectInput = ({ required, selectText, label, value, prop, options, disabled, onValueChanged, onSubmit }: SelectProps) => {
   return (
     <>
       <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor={`grid-${prop}`}>
@@ -22,6 +23,7 @@ const SelectInput = ({ required, selectText, label, value, prop, options, onValu
       <select
         className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         id={`grid-${prop}`}
+        disabled={disabled}
         name={prop}
         value={value ?? ""}
         onChange={onValueChanged}

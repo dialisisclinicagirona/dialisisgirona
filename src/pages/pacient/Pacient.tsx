@@ -90,7 +90,7 @@ const PacientView = () => {
   }
 
   const cleanPacientData = (pacient: any): Partial<typeof pacient> => {
-    const {anticoagulant_nom, dialitzador_nom, conc_acid_nom, conc_bic_nom, segellat_cvc_nom, ultima_actualitzacio_pes_tolerat, ...cleaned } = pacient;
+    const {anticoagulant_nom, dialitzador_nom, conc_acid_nom, conc_bic_nom, segellat_cvc_nom, ultima_actualitzacio_pes_tolerat, fav_tecnica_nom, ...cleaned } = pacient;
     return cleaned;
   };
 
@@ -150,8 +150,7 @@ const PacientView = () => {
       tolerancia_uf: '',
       perfil_uf: '',
       agulles: '',
-      acces_vascular: '',
-      segellat_cvc: undefined,
+      flux_acces: '',
       hemostasia: '',
     };
     

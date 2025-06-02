@@ -5,10 +5,11 @@ type InputProps = {
     label: string;
     value: string;
     prop: keyof Pacient | string;
+    disabled?: boolean;
     onValueChanged?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     onSubmit?: () => void;
 };
-const TextAreaInput = ({label, value, prop, onValueChanged, onSubmit}: InputProps) => {
+const TextAreaInput = ({label, value, prop, disabled, onValueChanged, onSubmit}: InputProps) => {
     return (
     <>
         <label className="block tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor={`grid-${prop}`}>
@@ -18,6 +19,7 @@ const TextAreaInput = ({label, value, prop, onValueChanged, onSubmit}: InputProp
             id={`grid-${prop}`}
             name={prop}
             value={value}
+            disabled={disabled}
             onChange={onValueChanged}
             onBlur={(onSubmit)} />
     </>);
