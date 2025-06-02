@@ -21,7 +21,7 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
     const [dialitzadors, setDialitzadors] = useState<Option[]>([]);
     const [concsAcid, setConcsAcid] = useState<Option[]>([]);
     const [concsBic, setConcsBic] = useState<Option[]>([]);
-    const [segellatsCVC, setSegellatsCVC] = useState<Option[]>([]);
+    const [favTecniques, setFavTecniques] = useState<Option[]>([]);
     // const opcionsSN = [{ id: "Sí", nom: "Sí" }, { id: "No", nom: "No" }];
     // const opcionsDiabetis = [{id: "Tipus I", nom: "Tipus I"}, {id: "Tipus II", nom: "Tipus II"}];
     // const opcionsUbicacio = [
@@ -52,13 +52,13 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
         const d = await fetchDialitzadors();
         const ca = await fetchConcentracionsAcid();
         const cb = await fetchConcentracionsBicarbonat();
-        const sc = await fetchSegellatsCVC();
+        const sc = await fetchFavTecniques();
         setEnitatsAsseguranca(e);
         setAnticoagulants(a);
         setDialitzadors(d);
         setConcsAcid(ca);
         setConcsBic(cb);
-        setSegellatsCVC(sc);
+        setFavTecniques(sc);
       };
 
       fetchData();
@@ -131,13 +131,13 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
       return data;
     };
 
-    const fetchSegellatsCVC = async (): Promise<Option[]> => {
+    const fetchFavTecniques = async (): Promise<Option[]> => {
       const { data, error } = await supabase
-        .from('segellat_cvc')
+        .from('fistula_tecnica')
         .select('*');
       //console.log("Segellats", data);
       if (error) {
-        console.error("Error obtenint segellats CVC:", error.message);
+        console.error("Error obtenint tècniques de FAV:", error.message);
         return [];
       }
     
@@ -217,7 +217,7 @@ const PacientForm = ({pacient, reset, onPacientChange, onSubmitChange}: FormProp
             {tab === "form-venos" && (
               <VenosTab 
                 pacient={pacient} 
-                segellatsCVC={segellatsCVC} 
+                favTecniques={favTecniques} 
                 onPacientChange={onPacientChange} 
                 onSubmitChange={onSubmitChange} 
               />

@@ -1,27 +1,26 @@
 import { DadaPacient, Option } from "../../../types/supabase";
 import InputText from "../../common/TextInput";
 import SelectInput from "../../common/SelectInput";
-import TextInput from "../../common/TextInput";
 import TextAreaInput from "../../common/TextAreaInput";
 import DateInput from "../../common/DateInput";
 
 type VenosTabProps = {
   pacient: DadaPacient;
-  segellatsCVC: Option[];
+  favTecniques: Option[];
   onPacientChange?: (updatedPacient: DadaPacient) => void;
   onSubmitChange?: () => void;
 };
 
 const VenosTab = ({
   pacient,
-  segellatsCVC,
+  favTecniques,
   onPacientChange,
   onSubmitChange
 }: VenosTabProps) => {
   const opcionsSN = [{ id: "Sí", nom: "Sí" }, { id: "No", nom: "No" }];
   const opcionsFAV = [{id: "No", nom: "No"}, {id: "Unipunció", nom: "Unipunció"}, {id: "Bipunció", nom: "Bipunció"}];
   const opcionsHemostasia = [{id: "Manual", nom: "Manual"}, {id: "Dispositiu", nom: "Dispositiu"}];
-  const opcionsFAVTecniques = [{id: "1", nom: "Buttonhole"}, {id: "2", nom: "Escala"}, {id: "3", nom: "Àrea"}, {id: "4", nom: "Gore"}];
+  //const opcionsFAVTecniques = [{id: "1", nom: "Buttonhole"}, {id: "2", nom: "Escala"}, {id: "3", nom: "Àrea"}, {id: "4", nom: "Gore"}];
   const opcionsAgulles = [{id: "Biselada", nom: "Biselada"}, {id: "Roma", nom: "Roma"}, {id: "Clampcath", nom: "Clampcath"}];
   const opcionsAgullesMides = [{id: "18", nom: "18"}, {id: "17", nom: "17"}, {id: "16", nom: "16"}, {id: "15", nom: "15"}];
 
@@ -87,7 +86,7 @@ const VenosTab = ({
                 prop="fav_tecnica"
                 disabled={pacient.fav === "No"}
                 onValueChanged={handleChange}
-                options={opcionsFAVTecniques}
+                options={favTecniques}
                 onSubmit={onSubmitChange}
               />
             </div>
