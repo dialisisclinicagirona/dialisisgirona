@@ -1,5 +1,5 @@
 @import "tailwindcss";
 
-select:disabled, input:disabled {
+select:disabled, input:disabled, textarea:disabled {
     color:#ccc;
 }

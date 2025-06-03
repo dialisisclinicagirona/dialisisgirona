@@ -20,7 +20,7 @@ const VenosTab = ({
   const opcionsSN = [{ id: "Sí", nom: "Sí" }, { id: "No", nom: "No" }];
   const opcionsFAV = [{id: "No", nom: "No"}, {id: "Unipunció", nom: "Unipunció"}, {id: "Bipunció", nom: "Bipunció"}];
   const opcionsHemostasia = [{id: "Manual", nom: "Manual"}, {id: "Dispositiu", nom: "Dispositiu"}];
-  //const opcionsFAVTecniques = [{id: "1", nom: "Buttonhole"}, {id: "2", nom: "Escala"}, {id: "3", nom: "Àrea"}, {id: "4", nom: "Gore"}];
+  const opcionsCateterTipus = [{id: "No", nom: "No"},{id: "AxA", nom: "AxA"}, {id: "AxV", nom: "AxV"}];
   const opcionsAgulles = [{id: "Biselada", nom: "Biselada"}, {id: "Roma", nom: "Roma"}, {id: "Clampcath", nom: "Clampcath"}];
   const opcionsAgullesMides = [{id: "18", nom: "18"}, {id: "17", nom: "17"}, {id: "16", nom: "16"}, {id: "15", nom: "15"}];
 
@@ -52,6 +52,31 @@ const VenosTab = ({
         pacientTemp.trans_propera_revisio = null;
         pacientTemp.fav_comentaris = "";
 
+      }
+      else if(value === "Unipunció"){
+        pacientTemp.agullaV = "";
+        pacientTemp.agullaV_mida = null;
+      }
+
+      onPacientChange({
+        ...pacientTemp,
+        [e.target.name]: e.target.value || null
+      });
+    }
+  };
+
+  const handleChangeCateter = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (onPacientChange) {
+      const pacientTemp = { ...pacient };
+      const value = e.target.value;
+      
+      if(value === "No") {
+        pacientTemp.llum_A = "";
+        pacientTemp.llum_V = "";
+        pacientTemp.cateter_comentaris = "";
+      }
+      else if(value === "AxA") {  
+        pacientTemp.llum_V = "";
       }
 
       onPacientChange({
@@ -130,7 +155,7 @@ const VenosTab = ({
                 label="Agulla Venosa"
                 value={pacient.agullaV?.toString() ?? ''}
                 prop="agullaV"
-                disabled={pacient.fav === "No"}
+                disabled={pacient.fav !== "Bipunció"}
                 onValueChanged={handleChange}
                 options={opcionsAgulles}
                 onSubmit={onSubmitChange}
@@ -141,7 +166,7 @@ const VenosTab = ({
                 label="Mida"
                 value={pacient.agullaV_mida?.toString() ?? ''}
                 prop="agullaV_mida"
-                disabled={pacient.fav === "No"}
+                disabled={pacient.fav !== "Bipunció"}
                 onValueChanged={handleChange}
                 options={opcionsAgullesMides}
                 onSubmit={onSubmitChange}
@@ -217,6 +242,58 @@ const VenosTab = ({
               />
             </div>
           </div>
+        </div>
+      </div>
+      <br/>
+      <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div className="space-y-2">
+          <h3 className="w-full text-lg font-semibold text-gray-800 mb-2">Catéter</h3>
+           <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/3 px-2">
+              <SelectInput
+                label="Tipus"
+                value={pacient.cateter?.toString() ?? ''}
+                prop="cateter"
+                onValueChanged={handleChangeCateter}
+                options={opcionsCateterTipus}
+                required={true}
+                onSubmit={onSubmitChange}
+              />
+            </div>
+            <div className="w-full md:w-1/3 px-2">
+              <InputText
+                label="Llum A"
+                value={pacient.llum_A?.toString() ?? ''}
+                prop="llum_A"
+                disabled={pacient.cateter === "No"}
+                onValueChanged={handleChange}
+                onSubmit={onSubmitChange}
+              />
+            </div>
+            <div className="w-full md:w-1/4 px-2">
+              <InputText
+                label="Llum V"
+                value={pacient.llum_V?.toString() ?? ''}
+                prop="llum_V"
+                disabled={pacient.cateter !== "AxV"}
+                onValueChanged={handleChange}
+                onSubmit={onSubmitChange}
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/1 px-2">
+              <TextAreaInput
+                label="Comentaris"
+                value={pacient.cateter_comentaris?.toString() ?? ''}
+                prop="cateter_comentaris"
+                disabled={pacient.cateter === "No"}
+                onValueChanged={handleChange}
+                onSubmit={onSubmitChange}
+              />
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
