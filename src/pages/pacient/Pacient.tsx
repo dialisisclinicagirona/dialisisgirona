@@ -26,15 +26,15 @@ const PacientView = () => {
   const handlePacientChange = (updatedPacient: DadaPacient) => {
     const hasChanged = JSON.stringify(selectedPacient) !== JSON.stringify(updatedPacient);
     const samePacient = selectedPacient?.id === updatedPacient.id;
-    console.log("Pacient Change", hasChanged, samePacient)
+    //console.log("Pacient Change", hasChanged, samePacient)
     setSelectedPacient(updatedPacient);
     setAllowUpdate(samePacient && hasChanged);
     
   };
 
   const handleSubmitPacient = async () =>{
-    console.log("Commit pacient", selectedPacient);
-    console.log("Allow update", allowUpadate);
+    //console.log("Commit pacient", selectedPacient);
+    //console.log("Allow update", allowUpadate);
     
     if (!selectedPacient) return null;
     
@@ -43,7 +43,7 @@ const PacientView = () => {
       if (!selectedPacient.id) {
         const pacientACrear = cleanPacientData({ ...selectedPacient });
 
-        console.log("Nou pacient", pacientACrear);
+        //console.log("Nou pacient", pacientACrear);
 
         const { data, error } = await supabase
           .from('pacients')
@@ -53,7 +53,7 @@ const PacientView = () => {
 
         if (error) throw error;
         
-        console.log('Nou pacient creat:', data);
+        //console.log('Nou pacient creat:', data);
         
         // Actualitzar l'estat amb el pacient creat (que tindrà un ID assignat)
         if (data && data.length > 0) {
