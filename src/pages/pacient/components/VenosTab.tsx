@@ -364,7 +364,7 @@ const VenosTab = ({
                     label="Llum V"
                     value={pacient.llum_V?.toString() ?? ''}
                     prop="llum_V"
-                    disabled={pacient.cateter !== "AxV"}
+                    disabled={pacient.cateter === "No"}
                     onValueChanged={handleChange}
                     onSubmit={onSubmitChange}
                   />
