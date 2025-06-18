@@ -1,4 +1,7 @@
 # DialisisGirona App
+> Node 19
+> npm run dev
+
 
 La DialisisGirona App és una aplicació web per a la gestió de pacients amb malaltia renal crònica en trànsit cap a la dialisi. L'aplicació permet als professionals sanitaris gestionar les dades dels pacients, inclòs el seu historial mèdic, els resultats d'anàlisis i les visites mèdiques.
 

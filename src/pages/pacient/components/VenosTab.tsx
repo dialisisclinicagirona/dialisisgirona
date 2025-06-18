@@ -27,10 +27,20 @@ const VenosTab = ({
   const opcionsCateterTipus = [{id: "No", nom: "No"},{id: "AxA", nom: "AxA"}, {id: "AxV", nom: "AxV"}];
   const opcionsAgulles = [{id: "Biselada", nom: "Biselada"}, {id: "Roma", nom: "Roma"}, {id: "Clampcath", nom: "Clampcath"}];
   const opcionsAgullesMides = [{id: "18", nom: "18"}, {id: "17", nom: "17"}, {id: "16", nom: "16"}, {id: "15", nom: "15"}];
+  const opcionsIncidenciaTipus = [
+    { id: "Punció difícil", nom: "Punció difícil" },
+    { id: "Extravasació", nom: "Extravasació" },
+    { id: "Infecció", nom: "Infecció" },
+    { id: "Obstrucció", nom: "Obstrucció" },
+    { id: "Altres", nom: "Altres" },
+  ];
 
   const [isFAVIExpanded, setIsFAVIExpanded] = useState(true);
   const [incidencies, setIncidencies] = useState<Incidencia[]>([]);
   const [isCateterExpanded, setIsCateterExpanded] = useState(true);
+  const [novaIncidencia, setNovaIncidencia] = useState({ tipus: '', descripcio: '' });
+  const [errorIncidencia, setErrorIncidencia] = useState<string | null>(null);
+  const [loadingIncidencia, setLoadingIncidencia] = useState(false);
 
   useEffect(() => {
     if(pacient && pacient.id) {
@@ -43,11 +53,11 @@ const VenosTab = ({
           .from('incidencia_pacient')
           .select(`*`)
           .eq('pacient_id', pacient.id)
-          .order('data_hora', { ascending: false });
+          .order('data', { ascending: false });
               
             
     if (error) throw error;
-
+    console.log("Incidencies", data);
     // Actualitzar l'estat amb el pacient creat (que tindrà un ID assignat)
     if (data && data.length > 0) {
       // Obtenir les dades completes del nou pacient
@@ -124,6 +134,33 @@ const VenosTab = ({
 
   const toggleCateterPanel = () => {
     setIsCateterExpanded(!isCateterExpanded);
+  };
+
+  const handleNovaIncidenciaChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
+    setNovaIncidencia({ ...novaIncidencia, [e.target.name]: e.target.value });
+  };
+
+  const handleCrearIncidencia = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorIncidencia(null);
+    if (!novaIncidencia.tipus || !novaIncidencia.descripcio) {
+      setErrorIncidencia('Cal omplir tots els camps.');
+      return;
+    }
+    setLoadingIncidencia(true);
+    const { error } = await supabase.from('incidencia_pacient').insert({
+      pacient_id: pacient.id,
+      tipus: novaIncidencia.tipus,
+      descripcio: novaIncidencia.descripcio,
+      data: new Date().toISOString(),
+    });
+    setLoadingIncidencia(false);
+    if (error) {
+      setErrorIncidencia('Error al crear la incidència.');
+      return;
+    }
+    setNovaIncidencia({ tipus: '', descripcio: '' });
+    fetchIncidenciesPacient();
   };
 
   return (
@@ -386,36 +423,69 @@ const VenosTab = ({
           )}
         </div>
       </div>
-          <br/>
-          {/* Incidències del pacient */}
-      {incidencies.length > 0 &&
+      
+      <br/>
+
+      {/* Incidències del pacient */}
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
-        <div className="space-y-2">
-          <h1 className="text-lg font-semibold text-gray-800">Incidències</h1>
-          <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full md:w-1/1 px-2">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-100">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data i hora</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Incidència</th>
-                    </tr>
-                  </thead>      
-                  <tbody className="bg-white divide-y divide-gray-200">
-                  {incidencies.map((incidencia, index) => (
-                        <tr key={index} className="hover:bg-gray-50">
-                          <td className="px-6 py-4 text-sm text-gray-500">
-                            {format(new Date(incidencia.data), 'dd/MM/yyyy HH:mm', { locale: ca })}</td>
-                          <td className="px-6 py-4 text-sm text-gray-500">{incidencia.descripcio}</td> 
-                        </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-          </div>
+      {/* Formulari per registrar una incidència nova */}
+      <form className="flex flex-wrap items-end mb-6 gap-2" onSubmit={handleCrearIncidencia}>
+        <div className="w-full md:w-1/4 px-2">
+          <SelectInput
+            label="Tipus"
+            value={novaIncidencia.tipus}
+            prop="tipus"
+            onValueChanged={handleNovaIncidenciaChange}
+            options={opcionsIncidenciaTipus}
+            required={true}
+          />
         </div>
+        <div className="w-full md:w-2/4 px-2">
+          <InputText
+            label="Descripció"
+            value={novaIncidencia.descripcio}
+            prop="descripcio"
+            onValueChanged={handleNovaIncidenciaChange}
+          />
+        </div>
+        <div className="w-full md:w-1/6 px-2">
+          <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50" disabled={loadingIncidencia}>
+            {loadingIncidencia ? 'Guardant...' : 'Afegir'}
+          </button>
+        </div>
+        {errorIncidencia && <div className="w-full text-red-600 px-2">{errorIncidencia}</div>}
+      </form>
+
+        {incidencies.length > 0 &&
+          <div className="space-y-2">
+            <h1 className="text-lg font-semibold text-gray-800">Incidències</h1>
+            <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full md:w-1/1 px-2">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data i hora</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipus</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Incidència</th>
+                      </tr>
+                    </thead>      
+                    <tbody className="bg-white divide-y divide-gray-200">
+                    {incidencies.map((incidencia, index) => (
+                          <tr key={index} className="hover:bg-gray-50">
+                            <td className="px-6 py-4 text-sm text-gray-500">
+                              {format(new Date(incidencia.data), 'dd/MM/yyyy HH:mm', { locale: ca })}</td>
+                            <td className="px-6 py-4 text-sm text-gray-500">{incidencia.tipus}</td> 
+                            <td className="px-6 py-4 text-sm text-gray-500">{incidencia.descripcio}</td> 
+                          </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>   
+            </div>
+        </div>
+          }
+        
       </div>
-      }
     </div>
   );
 };
