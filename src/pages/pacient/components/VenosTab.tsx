@@ -428,8 +428,10 @@ const VenosTab = ({
 
       {/* Incidències del pacient */}
       <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+      <div className="space-y-2">
+      <h1 className="text-lg font-semibold text-gray-800">Incidències</h1>
       {/* Formulari per registrar una incidència nova */}
-      <form className="flex flex-wrap items-end mb-6 gap-2" onSubmit={handleCrearIncidencia}>
+      <form className="flex flex-wrap items-center mb-6 gap-2" onSubmit={handleCrearIncidencia}>
         <div className="w-full md:w-1/4 px-2">
           <SelectInput
             label="Tipus"
@@ -448,8 +450,8 @@ const VenosTab = ({
             onValueChanged={handleNovaIncidenciaChange}
           />
         </div>
-        <div className="w-full md:w-1/6 px-2">
-          <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50" disabled={loadingIncidencia}>
+        <div className="w-full md:w-1/6 px-2 mt-3">
+          <button type="submit" className="bg-[#0097A7] text-white px-4 py-2 rounded hover:bg-[#2cc0d0] disabled:opacity-50" disabled={loadingIncidencia}>
             {loadingIncidencia ? 'Guardant...' : 'Afegir'}
           </button>
         </div>
@@ -457,8 +459,7 @@ const VenosTab = ({
       </form>
 
         {incidencies.length > 0 &&
-          <div className="space-y-2">
-            <h1 className="text-lg font-semibold text-gray-800">Incidències</h1>
+         
             <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full md:w-1/1 px-2">
                   <table className="min-w-full divide-y divide-gray-200">
@@ -482,9 +483,9 @@ const VenosTab = ({
                   </table>
                 </div>   
             </div>
-        </div>
+       
           }
-        
+         </div>
       </div>
     </div>
   );
